@@ -1,0 +1,21 @@
+<mat-grid-list
+    [cols]="2"
+>
+    <mat-grid-tile
+        *ngFor="let theme of (themes$ | async)"
+    >
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>{{ theme.name }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>
+                    {{ theme.description }} 
+                </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="primary">S'abonner</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
