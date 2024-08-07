@@ -5,6 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ThemesModule } from './features/themes/themes.module';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -12,9 +14,10 @@ import { HomeComponent } from './pages/home/home.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ThemesModule,
     MatButtonModule,
   ],
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
