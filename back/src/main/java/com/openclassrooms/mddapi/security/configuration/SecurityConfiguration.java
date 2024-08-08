@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.security.jwt.configuration;
+package com.openclassrooms.mddapi.security.configuration;
 
 import java.util.List;
 
