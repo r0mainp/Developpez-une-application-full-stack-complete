@@ -2,6 +2,7 @@ package com.openclassrooms.mddapi.security.jwt;
 
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,20 +21,15 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter{
-    private final HandlerExceptionResolver handlerExceptionResolver;
 
+    @Autowired
+    private HandlerExceptionResolver handlerExceptionResolver;
+
+    @Autowired
     private JwtUtils jwtUtils;
-    private UserDetailsService userDetailsService;
 
-    public JwtAuthenticationFilter(
-        JwtUtils jwtUtils,
-        UserDetailsService userDetailsService,
-        HandlerExceptionResolver handlerExceptionResolver
-    ){
-        this.jwtUtils = jwtUtils;
-        this.userDetailsService = userDetailsService;
-        this.handlerExceptionResolver = handlerExceptionResolver;
-    }
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     /**
      * Filters incoming HTTP requests to authenticate requests based on JWT in the Authorization header.
