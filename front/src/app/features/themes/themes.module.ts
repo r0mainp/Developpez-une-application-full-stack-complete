@@ -3,22 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { ThemesRoutingModule } from './themes-routing.module';
 import { ListComponent } from './components/list/list.component';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatCardModule} from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
+import { SharedModule } from 'src/app/shared/shared.module';
 
-const materialModules = [
-  MatGridListModule,
-  MatCardModule,
-  MatButtonModule,
-]
+
 
 @NgModule({
   declarations: [ListComponent],
   imports: [
-    CommonModule,
     ThemesRoutingModule,
-    ...materialModules
+    SharedModule,
   ]
 })
 export class ThemesModule { }

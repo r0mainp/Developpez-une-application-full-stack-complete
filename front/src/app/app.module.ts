@@ -8,6 +8,10 @@ import { HomeComponent } from './pages/home/home.component';
 import { ThemesModule } from './features/themes/themes.module';
 import { provideHttpClient } from '@angular/common/http';
 import { AuthModule } from './features/auth/auth.module';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { SharedModule } from './shared/shared.module';
+
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -17,7 +21,7 @@ import { AuthModule } from './features/auth/auth.module';
     BrowserAnimationsModule,
     ThemesModule,
     AuthModule,
-    MatButtonModule,
+    SharedModule,
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent],
