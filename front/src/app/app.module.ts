@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ThemesModule } from './features/themes/themes.module';
 import { provideHttpClient } from '@angular/common/http';
+import { AuthModule } from './features/auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -15,6 +16,7 @@ import { provideHttpClient } from '@angular/common/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     ThemesModule,
+    AuthModule,
     MatButtonModule,
   ],
   providers: [provideHttpClient()],
