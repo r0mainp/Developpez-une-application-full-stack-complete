@@ -1,10 +1,10 @@
-<div class="login" fxLayout="row" fxLayoutAlign="center center">
+<div class="register" fxLayout="row" fxLayoutAlign="center center">
     <mat-card>
         <mat-card-header fxLayoutAlign="center center">
-            <mat-card-title>Se connecter</mat-card-title>
+            <mat-card-title>S'inscrire</mat-card-title>
         </mat-card-header>
         <form 
-            class="login-form" 
+            class="register-form" 
             [formGroup]="form" 
             (ngSubmit)="submit()"
         >
@@ -12,14 +12,21 @@
                 <mat-form-field fxFlex>
                     <input 
                         matInput 
-                        placeholder="Email"
+                        placeholder="Nom d'utilisateur"
+                        formControlName="username"
+                    >
+                </mat-form-field>
+                <mat-form-field fxFlex>
+                    <input 
+                        matInput 
+                        placeholder="Adresse e-mail"
                         formControlName="email"
                     >
                 </mat-form-field>
                 <mat-form-field fxFlex>
                     <input 
                         matInput type="password" 
-                        placeholder="Password"
+                        placeholder="Mot de passe"
                         formControlName="password"
                     >
                 </mat-form-field>
@@ -30,7 +37,7 @@
                 type="submit" 
                 [disabled]="form.invalid"
             >
-                Se connecter
+                S'inscrire
             </button>
         </form>
     </mat-card>
