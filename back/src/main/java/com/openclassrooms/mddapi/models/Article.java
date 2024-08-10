@@ -1,19 +1,18 @@
 package com.openclassrooms.mddapi.models;
 
-
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -27,7 +26,7 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 @Entity
-@Table(name = "THEMES")
+@Table(name = "ARTICLES")
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(of = {"id"})
@@ -35,19 +34,18 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Theme {
-
+public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotBlank
     @Size(max = 100)
-    private String name;
+    private String title;
 
     @NotNull
     @Size(max = 2500)
-    private String description;
+    private String content;
 
     @CreatedDate
     @Column(name = "created_at", updatable = false)
@@ -57,7 +55,12 @@ public class Theme {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "theme", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Article> articles;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "theme_id", nullable = false)
+    private Theme theme;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author", nullable = false)
+    private User author;
 
 }
