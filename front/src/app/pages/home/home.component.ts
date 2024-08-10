@@ -16,6 +16,6 @@ export class HomeComponent implements OnInit {
   };
 
   goToRegister() {
-    // this.router.navigateByUrl('/register')
+    this.router.navigateByUrl('/register')
   };
 }
