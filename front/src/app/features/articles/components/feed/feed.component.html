@@ -1,1 +1,23 @@
-<p>feed works!</p>
+<app-header></app-header>
+<mat-grid-list
+    [cols]="2"
+>
+    <mat-grid-tile
+        *ngFor="let article of (articles$ | async)"
+    >
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>{{ article.title }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>
+                    {{ article.content }} 
+                </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="primary">S'abonner</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
+
