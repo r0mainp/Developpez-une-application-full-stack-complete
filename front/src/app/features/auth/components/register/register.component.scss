@@ -1,0 +1,33 @@
+@import 'mq-mixins';
+#app-header{
+    display: none;
+    @include sm {
+        display: block;
+    }
+}
+.back-btn-container{
+    position: absolute;
+    width: 100%;
+}
+
+.register,.form-container,.register-form,.card-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.register{
+    height: $height-w-header;
+    position: relative;
+    .logo{
+        width: 100%;
+        max-width: 450px;
+        display: block;
+        @include sm {
+            display: none;
+        }
+    }
+    .form-container{
+        padding: 1rem;
+    }
+}

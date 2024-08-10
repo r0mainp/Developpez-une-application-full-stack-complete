@@ -1,15 +1,24 @@
-<app-header></app-header>
+<app-header  id="app-header">
+</app-header>
+<div class="back-btn-container">
+    <button mat-icon-button>
+        <mat-icon>
+            arrow_back
+        </mat-icon>
+    </button>
+</div>
 <div class="register" fxLayout="row" fxLayoutAlign="center center">
-    <mat-card>
+    <img src="/assets/logo_p6.png" alt="logo" class="logo"/>
+    <mat-card class="form-container">
         <mat-card-header fxLayoutAlign="center center">
-            <mat-card-title>S'inscrire</mat-card-title>
+            <mat-card-title>Inscription</mat-card-title>
         </mat-card-header>
         <form 
             class="register-form" 
             [formGroup]="form" 
             (ngSubmit)="submit()"
         >
-            <mat-card-content fxLayout="column">
+            <mat-card-content fxLayout="column" class="card-content">
                 <mat-form-field fxFlex>
                     <input 
                         matInput 
