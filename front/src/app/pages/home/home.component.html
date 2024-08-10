@@ -1,7 +1,20 @@
-<div class="center">
-  <img src="/assets/logo_p6.png" alt="logo" />
-  <div>
-    <button mat-raised-button color="primary" (click)="goToLogin()">Se connecter</button>
-    <button mat-raised-button color="primary" (click)="goToRegister()">S'inscrire</button>
+<div class="container">
+  <img src="/assets/logo_p6.png" alt="logo" class="home-logo"/>
+  <div class="button-container">
+    <button 
+      mat-raised-button 
+      color="primary" 
+      (click)="goToLogin()"
+    >
+      Se connecter
+    </button>
+    <button 
+      mat-raised-button 
+      color="primary" 
+      (click)="goToRegister()"
+      class="register-btn"
+    >
+      S'inscrire
+    </button>
   </div>
 </div>
