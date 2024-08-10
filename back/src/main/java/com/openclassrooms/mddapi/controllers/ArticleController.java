@@ -32,11 +32,12 @@ public class ArticleController {
     @Autowired
     ArticleService articleService;
 
-    private User currentUser = this.userService.getCurrentUser();
+    private User currentUser;
 
 
     @GetMapping()
     public ResponseEntity<?> findAllArticleFromSubscribedThemes() {
+        currentUser = this.userService.getCurrentUser();
         if (currentUser == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
         }
@@ -58,6 +59,7 @@ public class ArticleController {
 
     @PostMapping("/create")
     public Article createArticle(ArticleRequest request){
+        currentUser = this.userService.getCurrentUser();
         Theme relatedTheme = this.themeService.findById(request.getThemeId());
 
         Article articleToCreate = new Article()
