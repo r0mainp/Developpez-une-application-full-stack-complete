@@ -1,7 +1,6 @@
 package com.openclassrooms.mddapi.payload.response;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class UserResponse {
     private Integer id; 
