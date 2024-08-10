@@ -49,9 +49,9 @@ public class ArticleController {
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") String id){
         try {
-            Article theme = this.articleService.findById(Integer.parseInt(id));
+            Article article = this.articleService.findById(Integer.parseInt(id));
     
-            return ResponseEntity.ok().body(theme);
+            return ResponseEntity.ok().body(article);
         }catch (NumberFormatException e) {
             return ResponseEntity.badRequest().build();
         }
