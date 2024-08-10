@@ -8,9 +8,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { ThemesModule } from './features/themes/themes.module';
 import { provideHttpClient } from '@angular/common/http';
 import { AuthModule } from './features/auth/auth.module';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatCardModule } from '@angular/material/card';
 import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
 
 
 @NgModule({
@@ -20,6 +19,7 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     ThemesModule,
+    CoreModule,
     AuthModule,
     SharedModule,
   ],

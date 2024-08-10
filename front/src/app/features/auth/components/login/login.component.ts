@@ -3,8 +3,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { LoginRequest } from '../../interfaces/login-request';
 import { AuthService } from '../../services/auth.service';
 import { AuthSuccess } from '../../interfaces/auth-success';
-import { User } from 'src/app/interfaces/user';
 import { Router } from '@angular/router';
+import { UserSessionService } from 'src/app/core/services/user-session.service';
+import { User } from 'src/app/core/interfaces/user';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,8 @@ export class LoginComponent {
   constructor(
     private builder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private userSessionService: UserSessionService,
   ){}
 
   public submit(): void {
@@ -39,11 +41,10 @@ export class LoginComponent {
     this.authService.login(loginRequest).subscribe(
       (response: AuthSuccess) => {
         localStorage.setItem('token', response.token);
-        // this.authService.me().subscribe((user: User) => {
-        //   this.sessionService.logIn(user);
-        //   this.router.navigate(['/themes'])
-        // });
-        this.router.navigate(['/themes'])
+        this.authService.me().subscribe((user: User) => {
+          this.userSessionService.logIn(user);
+          this.router.navigate(['/themes'])
+        });
       },
     );
   }

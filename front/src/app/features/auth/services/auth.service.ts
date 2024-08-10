@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { LoginRequest } from '../interfaces/login-request';
 import { Observable } from 'rxjs';
 import { AuthSuccess } from '../interfaces/auth-success';
-import { User } from 'src/app/interfaces/user';
 import { RegisterRequest } from '../interfaces/register-request';
+import { User } from 'src/app/core/interfaces/user';
 
 @Injectable({
   providedIn: 'root'
