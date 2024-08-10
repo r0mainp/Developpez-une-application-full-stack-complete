@@ -7,6 +7,5 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
   ],
-  providers: []
 })
 export class CoreModule { }

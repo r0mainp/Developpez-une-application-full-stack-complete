@@ -6,10 +6,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ThemesModule } from './features/themes/themes.module';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { AuthModule } from './features/auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
+import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 
 
 @NgModule({
@@ -23,7 +24,10 @@ import { CoreModule } from './core/core.module';
     AuthModule,
     SharedModule,
   ],
-  providers: [provideHttpClient()],
+  providers: [
+    provideHttpClient(withInterceptorsFromDi()),
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
