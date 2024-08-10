@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.payload.request.LoginRequest;
+import com.openclassrooms.mddapi.payload.request.RegisterRequest;
 import com.openclassrooms.mddapi.payload.request.Response.AuthResponse;
 import com.openclassrooms.mddapi.payload.request.Response.GenericResponse;
 import com.openclassrooms.mddapi.security.jwt.JwtUtils;
@@ -26,8 +27,8 @@ public class AuthController {
     @Autowired
     AuthenticationService authenticationService;
 
-     @PostMapping("/login")
- public ResponseEntity<?> authenticate(@RequestBody LoginRequest request) {
+    @PostMapping("/login")
+    public ResponseEntity<?> authenticate(@RequestBody LoginRequest request) {
         try {
             User authenticatedUser = authenticationService.authenticate(request);
 
@@ -39,6 +40,22 @@ public class AuthController {
         catch (AuthenticationException ex) {
             GenericResponse errorResponse = new GenericResponse("Wrong credentials");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
+        }
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
+        try {
+            User registeredUser = authenticationService.register(request);
+
+            String jwtToken = jwtUtils.generateToken(registeredUser);
+            AuthResponse response = new AuthResponse(jwtToken);
+
+            return ResponseEntity.ok(response);
+        }
+        catch (AuthenticationException ex) {
+            GenericResponse errorResponse = new GenericResponse("User already exits.");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorResponse);
         }
     }
 
