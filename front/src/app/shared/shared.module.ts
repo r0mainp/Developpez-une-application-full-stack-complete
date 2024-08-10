@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HeaderComponent } from './components/header/header.component';
 
 const materialModules = [
   MatGridListModule,
@@ -16,7 +17,9 @@ const materialModules = [
 ]
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    HeaderComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -27,7 +30,8 @@ const materialModules = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    HeaderComponent,
     ...materialModules
-  ]
+  ],
 })
 export class SharedModule { }
