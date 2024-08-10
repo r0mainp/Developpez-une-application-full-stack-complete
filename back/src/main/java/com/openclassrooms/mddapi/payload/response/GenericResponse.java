@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.payload.request.Response;
+package com.openclassrooms.mddapi.payload.response;
 
 public class GenericResponse {
     private String message;
