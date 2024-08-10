@@ -1,5 +1,6 @@
+@import 'mq-mixins';
 #app-header{
-    height: 70px;
+    height: $header-height;
 
     #header-logo{
         height: 100%;

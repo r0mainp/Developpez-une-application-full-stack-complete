@@ -10,6 +10,10 @@ $screen-lg-min: 992px;
 // Large tablets and desktops
 $screen-xl-min: 1200px;
 
+$header-height: 70px;
+
+$height-w-header: calc(100vh - $header-height);
+
 
 // Small devices
 @mixin sm {
