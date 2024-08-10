@@ -51,7 +51,7 @@ export class RegisterComponent {
         localStorage.setItem('token', response.token);
         this.authService.me().subscribe((user: User) => {
           this.userSessionService.logIn(user);
-          this.router.navigate(['/themes'])
+          this.router.navigate(['/feed'])
         });
       }
     );
