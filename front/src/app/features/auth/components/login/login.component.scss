@@ -1,0 +1,33 @@
+@import 'mq-mixins';
+#app-header{
+    display: none;
+    @include sm {
+        display: block;
+    }
+}
+.back-btn-container{
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+}
+
+.login,.form-container,.login-form,.card-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.login{
+    height: $height-w-header;
+    .logo{
+        width: 100%;
+        max-width: 450px;
+        display: block;
+        @include sm {
+            display: none;
+        }
+    }
+    .form-container{
+        padding: 1rem;
+    }
+}
