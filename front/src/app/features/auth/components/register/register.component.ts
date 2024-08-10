@@ -4,6 +4,8 @@ import { AuthService } from '../../services/auth.service';
 import { AuthSuccess } from '../../interfaces/auth-success';
 import { RegisterRequest } from '../../interfaces/register-request';
 import { Router } from '@angular/router';
+import { UserSessionService } from 'src/app/core/services/user-session.service';
+import { User } from 'src/app/core/interfaces/user';
 
 @Component({
   selector: 'app-register',
@@ -39,6 +41,7 @@ export class RegisterComponent {
     private builder: FormBuilder,
     private authService: AuthService,
     private router: Router,
+    private userSessionService: UserSessionService
   ){}
 
   public submit(): void {
@@ -46,11 +49,10 @@ export class RegisterComponent {
     this.authService.register(registerRequest).subscribe(
       (response: AuthSuccess) => {
         localStorage.setItem('token', response.token);
-        // this.authService.me().subscribe((user: User) => {
-        //   this.sessionService.logIn(user);
-        //   this.router.navigate(['/themes'])
-        // });
-        this.router.navigate(['/themes'])
+        this.authService.me().subscribe((user: User) => {
+          this.userSessionService.logIn(user);
+          this.router.navigate(['/themes'])
+        });
       }
     );
   }
