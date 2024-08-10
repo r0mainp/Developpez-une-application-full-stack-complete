@@ -1,7 +1,10 @@
 <app-header  id="app-header">
 </app-header>
 <div class="back-btn-container">
-    <button mat-icon-button>
+    <button 
+        mat-icon-button
+        (click)="goToHome()"
+    >
         <mat-icon>
             arrow_back
         </mat-icon>
