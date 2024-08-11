@@ -2,7 +2,13 @@
 
 <div class="articles-wrapper">
     <div class="page-header">
-        <button mat-raised-button color="primary">Créer un article</button>
+        <button 
+            mat-raised-button 
+            color="primary"
+            (click)="goToForm()"
+        >
+            Créer un article
+        </button>
         <span class="sort-button" (click)="updateOrder()">
             Trier par
             <button 
