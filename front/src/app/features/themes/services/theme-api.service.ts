@@ -15,4 +15,8 @@ export class ThemeApiService {
   public all(): Observable<Theme[]> {
     return this.httpClient.get<Theme[]>(this.pathService);
   }
+
+  public findById(id: string): Observable<Theme> {
+    return this.httpClient.get<Theme>(`${this.pathService}/${id}`);
+  }
 }

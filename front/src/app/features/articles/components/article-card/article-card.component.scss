@@ -1,16 +1,58 @@
+.article-wrapper{
+    margin: 1rem;
+}
 .article-item{
     flex-basis: 50%;
+    &:hover{
+        cursor: pointer;
+    }
     &.details{
         border: none;
         box-shadow: none;
-    }
-    &:hover{
-        cursor: pointer;
+        &:hover{
+            cursor:default;
+        }
     }
     .mat-mdc-card-subtitle{
         margin-bottom: 1rem;
         .author-item{
-            margin-left: 1rem;
+            margin: 0 1rem;
+        }
+    }
+
+}
+.comments-part{
+    margin: 1rem;
+    .comments-wrapper{
+        .title{
+            font-weight: 500;
+        }
+        .comments-container{
+            margin: 1rem;
+            .comment{
+                display: flex;
+                .username{
+                    font-weight: 400;
+                }
+                .content{
+                    border: 1px solid rgba(0, 0, 0, 0.315);
+                    box-shadow: 0 0 0 1px;
+                    border-radius: 8px;
+                    flex-grow: 1;
+                    padding: 1rem;
+                    margin: 0 1rem 1rem;
+                }
+            }
+        }
+        .comment-form{
+            display: flex;
+            align-items: center;
+            .textarea{
+                flex-grow: 1;
+            }
+            .submit-btn{
+                margin-left: 1rem;
+            }
         }
     }
 }

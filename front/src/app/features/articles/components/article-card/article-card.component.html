@@ -1,26 +1,73 @@
-<mat-card
-    class="article-item"
-    [ngClass]="isDetail?'details':''"
-    (click)="goToDetail(article.id)"
+<div
+    [ngClass]="isDetail?'article-wrapper':''"
 >
-    <mat-card-header>
-        <mat-card-title>{{ article.title | titlecase}}</mat-card-title>
-        <mat-card-subtitle>
-            <span class="date-item">Date: {{article.createdAt | date: 'YYYY/MM/dd'}}</span>
-            <span class="author-item">
-                Auteur: 
-                <span *ngIf="user$ | async as user; else notFound">
-                    {{ user.username }}
-                  </span>
-                  <ng-template #notFound>
-                    <span>Inconnu</span>
-                  </ng-template>
-            </span>
-        </mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-        <p>
-            {{ article.content }} 
-        </p>
-    </mat-card-content>
-</mat-card>
+    <mat-card
+        *ngIf="article; else noArticle"
+        class="article-item"
+        [ngClass]="isDetail?'details':''"
+        (click)="goToDetail(article.id)"
+    >
+        <mat-card-header>
+            <mat-card-title>{{ article.title | titlecase}}</mat-card-title>
+            <mat-card-subtitle>
+                <span class="date-item">Date: {{article.createdAt | date: 'YYYY/MM/dd'}}</span>
+                <span class="author-item">
+                    Auteur: 
+                    <span *ngIf="user$ | async as user; else notFound">
+                        {{ user.username }}
+                    </span>
+                    <ng-template #notFound>
+                        <span>Inconnu</span>
+                    </ng-template>
+                </span>
+                <span
+                    *ngIf="isDetail && (theme$ | async) as theme;"
+                    class="theme-item"
+                >
+                    Theme: {{ theme.name }}
+                </span>
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                {{ article.content }} 
+            </p>
+        </mat-card-content>
+    </mat-card>
+    <div
+        *ngIf="isDetail"
+        class="comments-part"
+    >
+        <hr>
+        <div class="comments-wrapper">
+            <h3 class="title">Commentaires</h3>
+            <div class="comments-container">
+                <div class="comment">
+                    <span class="username">Username</span>
+                    <div class="content">Contenu du commentaire</div>
+                </div>
+                <div class="comment">
+                    <span class="username">Username</span>
+                    <div class="content">Contenu du commentaire</div>
+                </div>
+            </div>
+            <div class="comment-form">
+                <mat-form-field class="textarea">
+                    <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+                </mat-form-field>
+                <button 
+                    color="primary"
+                    mat-fab
+                    class="submit-btn"
+                >
+                    <mat-icon>send</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <ng-template #noArticle>
+        <p>No article available.</p>
+    </ng-template>
+</div>
