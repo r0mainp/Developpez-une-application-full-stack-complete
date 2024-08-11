@@ -1,23 +1,54 @@
 <app-header></app-header>
-<mat-grid-list
-    [cols]="2"
->
-    <mat-grid-tile
-        *ngFor="let article of (articles$ | async)"
+
+<div class="articles-wrapper">
+    <div class="page-header">
+        <button mat-raised-button color="primary">Créer un article</button>
+        <span class="sort-button" (click)="updateOrder()">
+            Trier par
+            <button 
+                *ngIf="isOrderDesc; else orderAsc"
+                mat-icon-button
+                
+            >
+                <mat-icon>
+                    arrow_downward
+                </mat-icon>
+            </button>
+            <ng-template
+                #orderAsc
+            >
+                <button 
+                    mat-icon-button
+                >
+                    <mat-icon
+                        
+                    >
+                        arrow_upward
+                    </mat-icon>
+                </button>
+            </ng-template>
+        </span>
+    </div>
+    <div
+        class="articles-container"
     >
-        <mat-card>
+        <mat-card
+            *ngFor="let article of (articles$ | async)"
+            class="article-item"
+        >
             <mat-card-header>
                 <mat-card-title>{{ article.title }}</mat-card-title>
+                <mat-card-subtitle>
+                    <span>Date: {{article.createdAt | date}}</span>
+                    <span>Auteur: </span>
+                </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
                 <p>
                     {{ article.content }} 
                 </p>
             </mat-card-content>
-            <mat-card-actions>
-                <button mat-raised-button color="primary">S'abonner</button>
-            </mat-card-actions>
         </mat-card>
-    </mat-grid-tile>
-</mat-grid-list>
+    </div>
+</div>
 

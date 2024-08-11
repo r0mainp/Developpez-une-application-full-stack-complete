@@ -9,8 +9,12 @@ import { Observable } from 'rxjs';
   styleUrl: './feed.component.scss'
 })
 export class FeedComponent {
-
+  public isOrderDesc: boolean = true;
   public articles$: Observable<Article[]> = this.articleService.all();
 
   constructor(private articleService: ArticleService){}
+
+  public updateOrder():void {
+    this.isOrderDesc = !this.isOrderDesc;
+  }
 }

@@ -4,7 +4,7 @@ export interface Article {
     content: string;
     author: number;
     theme: number;
-    created_at?: string;
-    updated_at?: string;
+    createdAt?: string;
+    updatedAt?: string;
 
 }

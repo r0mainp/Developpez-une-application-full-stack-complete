@@ -1,0 +1,21 @@
+.articles-wrapper{
+    margin: 2rem;
+    .page-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .sort-button{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+    .articles-container{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        .article-item{
+            flex-basis: 50%;
+        }
+    }
+}
