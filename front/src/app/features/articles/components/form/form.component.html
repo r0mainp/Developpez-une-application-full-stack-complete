@@ -7,9 +7,10 @@
         >
         <mat-form-field>
             <mat-label>Séléctionner un thème</mat-label>
-            <mat-select formControlName="theme">
-                <mat-option value="one">First option</mat-option>
-                <mat-option value="two">Second option</mat-option>
+            <mat-select formControlName="theme_id">
+                <mat-option 
+                    *ngFor="let theme of themes$ |async"
+                    [value]="theme.id">{{theme.name}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field>
@@ -25,7 +26,7 @@
             color="primary" 
             type="submit" 
             [disabled]="form.invalid"
-        >
+            >
             S'inscrire
         </button>
     </form>
