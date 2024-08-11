@@ -2,10 +2,13 @@ package com.openclassrooms.mddapi.services;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.openclassrooms.mddapi.dto.ArticleDto;
+import com.openclassrooms.mddapi.mapper.ArticleMapper;
 import com.openclassrooms.mddapi.models.Article;
 import com.openclassrooms.mddapi.repository.ArticleRepository;
 
@@ -15,15 +18,24 @@ public class ArticleService {
     @Autowired
     ArticleRepository articleRepository;
 
-    public Article findById(Integer id){
-        return this.articleRepository.findById(id).orElse(null);
+    @Autowired
+    private ArticleMapper articleMapper;
+
+
+    public ArticleDto findById(Integer id){
+        Article article = this.articleRepository.findById(id).orElse(null);
+        return article != null ? articleMapper.toDto(article): null;
     }
 
-    public List<Article> findAllArticlesByUserSubscriptions(Integer userId){
+    public List<ArticleDto> findAllArticlesByUserSubscriptions(Integer userId){
         List<Integer> themeIds = Arrays.asList(1); // TODO: for tests, implements a solution based on subscriptions later
-        return this.articleRepository.findByThemeIdIn(themeIds);
+        List<Article> articles = this.articleRepository.findByThemeIdIn(themeIds);
+        return articles.stream()
+                       .map(articleMapper::toDto)
+                       .collect(Collectors.toList());
     }
 
+    // TODO: handle request or Dto later
     public Article create(Article article){
         return this.articleRepository.save(article);
     }
