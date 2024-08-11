@@ -80,7 +80,7 @@ public class AuthController {
 
         UserResponse userDetails = new UserResponse(
             currentUser.getId(),
-            currentUser.getUsername(),
+            currentUser.getDisplayUsername(),
             currentUser.getEmail(),
             currentUser.getCreatedAt(),
             currentUser.getUpdatedAt()

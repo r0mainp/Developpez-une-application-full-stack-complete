@@ -75,6 +75,10 @@ public class User implements UserDetails{
         return this.email;
     }
 
+    public String getDisplayUsername() {
+        return this.username;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
