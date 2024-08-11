@@ -24,7 +24,7 @@ import { ArticlesModule } from './features/articles/articles.module';
     CoreModule,
     AuthModule,
     SharedModule,
-    ArticlesModule
+    ArticlesModule,
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
