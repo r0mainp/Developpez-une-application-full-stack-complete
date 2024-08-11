@@ -56,7 +56,4 @@ export class RegisterComponent {
       }
     );
   }
-  public goToHome(): void{
-    this.router.navigate(['/'])
-  }
 }

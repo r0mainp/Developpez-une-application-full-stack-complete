@@ -16,3 +16,8 @@
         color: var(--mdc-text-button-label-text-color);
     }
 }
+.back-btn-container{
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+}

@@ -22,3 +22,14 @@
         </a>
     </div>
 </div>
+<div class="back-btn-container">
+    <button 
+        *ngIf="displayBackArrow"
+        mat-icon-button
+        (click)="back()"
+    >
+        <mat-icon>
+            arrow_back
+        </mat-icon>
+    </button>
+</div>
