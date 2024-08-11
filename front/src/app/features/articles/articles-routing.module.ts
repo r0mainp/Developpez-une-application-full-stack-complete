@@ -5,7 +5,7 @@ import { DetailsComponent } from './components/details/details.component';
 import { FormComponent } from './components/form/form.component';
 
 const routes: Routes = [
-  { title: 'Feed', path: 'feed', component: FeedComponent },
+  { title: 'Feed', path: '', component: FeedComponent },
   { title: 'Details', path: 'details/:id', component: DetailsComponent },
   { title: 'Form', path: 'create', component: FormComponent },
 ];

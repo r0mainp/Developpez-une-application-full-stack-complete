@@ -24,7 +24,7 @@ const routes: Routes = [
   },
   {
     canActivate: [AuthGuard],
-    path: 'articles',
+    path: 'feed',
     loadChildren: () => import('./features/articles/articles.module').then(m => m.ArticlesModule)
   }
 ];
