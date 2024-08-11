@@ -35,6 +35,7 @@
         <mat-card
             *ngFor="let article of (articles$ | async)"
             class="article-item"
+            (click)="goToDetail(article.id)"
         >
             <mat-card-header>
                 <mat-card-title>{{ article.title }}</mat-card-title>
