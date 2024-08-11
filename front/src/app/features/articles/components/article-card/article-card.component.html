@@ -8,18 +8,12 @@
             <span>Date: {{article.createdAt | date}}</span>
             <span>
                 Auteur: 
-                <span
-                    *ngIf="user; else notFound"
-                >
+                <span *ngIf="user$ | async as user; else notFound">
                     {{ user.username }}
-                </span>
-                <ng-template
-                    #notFound
-                >
-                    <span
-                        Inconnu
-                    ></span>
-                </ng-template>
+                  </span>
+                  <ng-template #notFound>
+                    <span>Inconnu</span>
+                  </ng-template>
             </span>
         </mat-card-subtitle>
     </mat-card-header>

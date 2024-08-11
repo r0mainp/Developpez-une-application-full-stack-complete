@@ -12,7 +12,7 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class ArticleCardComponent implements OnInit{
   @Input() public article!:Article;
-  public user!: User;
+  public user$!: Observable<User>;
 
   constructor(
     private userService: UserService,
@@ -21,13 +21,7 @@ export class ArticleCardComponent implements OnInit{
 
   public ngOnInit(): void {
     const authorId = this.article.authorId;
-
-    this.userService
-      .getUserById(authorId.toString())
-      .subscribe((user: User) => {
-        console.log(user)
-        return this.user = user
-      });
+    this.user$ = this.userService.getUserById(this.article.authorId.toString());
   }
 
   goToDetail(id: number): void {
