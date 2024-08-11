@@ -6,7 +6,7 @@
         <span class="sort-button" (click)="updateOrder()">
             Trier par
             <button 
-                *ngIf="isOrderDesc; else orderAsc"
+                *ngIf="sortOrder == 'desc'; else orderAsc"
                 mat-icon-button
                 
             >

@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   styleUrl: './feed.component.scss'
 })
 export class FeedComponent {
-  public isOrderDesc: boolean = true;
+  public sortOrder: string = 'desc';
   public articles$: Observable<Article[]> = this.articleService.all();
 
   constructor(
@@ -17,7 +17,7 @@ export class FeedComponent {
   ){}
 
   public updateOrder():void {
-    // TODO: Update order with queries
-    this.isOrderDesc = !this.isOrderDesc;
+    this.sortOrder = this.sortOrder == 'desc'?'asc': 'desc';
+    this.articles$ = this.articleService.all(this.sortOrder)
   }
 }

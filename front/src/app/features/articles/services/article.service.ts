@@ -11,8 +11,8 @@ export class ArticleService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public all(): Observable<Article[]> {
-    return this.httpClient.get<Article[]>(this.pathService);
+  public all(sortOrder: string = 'desc'): Observable<Article[]> {
+    return this.httpClient.get<Article[]>(`${this.pathService}?sort=${sortOrder}`);
   }
 
   public findById(id: string): Observable<Article> {
