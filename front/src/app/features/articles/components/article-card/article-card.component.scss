@@ -1,0 +1,6 @@
+.article-item{
+    flex-basis: 50%;
+    &:hover{
+        cursor: pointer;
+    }
+}
