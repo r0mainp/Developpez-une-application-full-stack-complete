@@ -6,6 +6,7 @@ import { FeedComponent } from './components/feed/feed.component';
 import { DetailsComponent } from './components/details/details.component';
 import { FormComponent } from './components/form/form.component';
 import { ArticleCardComponent } from './components/article-card/article-card.component';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -18,6 +19,9 @@ import { ArticleCardComponent } from './components/article-card/article-card.com
   imports: [
     SharedModule,
     ArticlesRoutingModule
+  ],
+  providers:[
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
   ]
 })
 export class ArticlesModule { }
