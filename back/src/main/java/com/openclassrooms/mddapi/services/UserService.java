@@ -8,7 +8,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.openclassrooms.mddapi.mapper.UserResponseMapper;
 import com.openclassrooms.mddapi.models.User;
+import com.openclassrooms.mddapi.payload.response.UserResponse;
 import com.openclassrooms.mddapi.repository.UserRepository;
 
 @Service
@@ -17,18 +19,22 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public Optional<User> getUserById(final Integer id) {
-        return userRepository.findById(id);
+    @Autowired
+    UserResponseMapper userResponseMapper;
+
+    public Optional<UserResponse> getUserById(final Integer id) {
+        return userRepository.findById(id).map(userResponseMapper::toUserResponse);
     }
 
-    public User getCurrentUser() {
+    public UserResponse getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
             Object principal = authentication.getPrincipal();
             
             if (principal instanceof UserDetails) {
                 String username = ((UserDetails) principal).getUsername();
-                return userRepository.findByEmail(username).orElse(null);
+                User user = userRepository.findByEmail(username).orElse(null);
+                return userResponseMapper.toUserResponse(user);
             }
         }
         return null;

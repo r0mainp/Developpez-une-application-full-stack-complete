@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.openclassrooms.mddapi.models.User;
+import com.openclassrooms.mddapi.payload.response.UserResponse;
 import com.openclassrooms.mddapi.services.UserService;
 
 @RestController
@@ -18,14 +18,16 @@ public class UserController {
     @Autowired
     UserService userService;
 
-
-     @GetMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") String id){
         try {
-            Optional<User> user = this.userService.getUserById(Integer.parseInt(id));
-    
-            return ResponseEntity.ok().body(user);
-        }catch (NumberFormatException e) {
+            Optional<UserResponse> userResponse = this.userService.getUserById(Integer.parseInt(id));
+            if (userResponse.isPresent()) {
+                return ResponseEntity.ok().body(userResponse.get());
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (NumberFormatException e) {
             return ResponseEntity.badRequest().build();
         }
     }

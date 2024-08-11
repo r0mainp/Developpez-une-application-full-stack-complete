@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.mddapi.dto.ArticleDto;
+import com.openclassrooms.mddapi.mapper.ArticleMapper;
 import com.openclassrooms.mddapi.models.Article;
-import com.openclassrooms.mddapi.models.Theme;
-import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.payload.request.ArticleRequest;
+import com.openclassrooms.mddapi.payload.response.UserResponse;
 import com.openclassrooms.mddapi.services.ArticleService;
 import com.openclassrooms.mddapi.services.ThemeService;
 import com.openclassrooms.mddapi.services.UserService;
@@ -33,7 +33,10 @@ public class ArticleController {
     @Autowired
     ArticleService articleService;
 
-    private User currentUser;
+    @Autowired
+    ArticleMapper articleMapper;
+
+    private UserResponse currentUser;
 
 
     @GetMapping()
@@ -61,14 +64,13 @@ public class ArticleController {
     @PostMapping("/create")
     public Article createArticle(ArticleRequest request){
         currentUser = this.userService.getCurrentUser();
-        Theme relatedTheme = this.themeService.findById(request.getThemeId());
 
-        Article articleToCreate = new Article()
-            .setAuthor(currentUser)
-            .setTheme(relatedTheme)
+        ArticleDto articleToCreate = new ArticleDto()
+            .setAuthorId(currentUser.getId())
+            .setThemeId(request.getThemeId())
             .setTitle(request.getTitle())
             .setContent(request.getContent());
 
-        return this.articleService.create(articleToCreate);
+        return this.articleService.create(this.articleMapper.toEntity(articleToCreate));
     }
 }

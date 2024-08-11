@@ -11,8 +11,8 @@ export class UserService {
   private pathService = 'api/user';
 
   constructor(private httpClient: HttpClient) { }
-  
-  public getUserById(id: number): Observable<User> {
+
+  public getUserById(id: string): Observable<User> {
     return this.httpClient.get<User>(`${this.pathService}/${id}`);
   }
 }
