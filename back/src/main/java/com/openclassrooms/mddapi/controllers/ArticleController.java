@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.openclassrooms.mddapi.dto.ArticleDto;
 import com.openclassrooms.mddapi.models.Article;
 import com.openclassrooms.mddapi.models.Theme;
 import com.openclassrooms.mddapi.models.User;
@@ -42,14 +43,14 @@ public class ArticleController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
         }
 
-        List<Article> articles = this.articleService.findAllArticlesByUserSubscriptions(currentUser.getId());
+        List<ArticleDto> articles = this.articleService.findAllArticlesByUserSubscriptions(currentUser.getId());
         return ResponseEntity.ok(articles);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") String id){
         try {
-            Article article = this.articleService.findById(Integer.parseInt(id));
+            ArticleDto article = this.articleService.findById(Integer.parseInt(id));
     
             return ResponseEntity.ok().body(article);
         }catch (NumberFormatException e) {
