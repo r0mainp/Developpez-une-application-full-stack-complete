@@ -12,6 +12,7 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class ArticleCardComponent implements OnInit{
   @Input() public article!:Article;
+  @Input() public isDetail!:boolean;
   public user$!: Observable<User>;
 
   constructor(

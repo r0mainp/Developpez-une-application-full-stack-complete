@@ -35,6 +35,7 @@
         <article-card
             *ngFor="let article of (articles$ | async)"
             [article]="article"
+            [isDetail]="false"
         ></article-card>
     </div>
 </div>

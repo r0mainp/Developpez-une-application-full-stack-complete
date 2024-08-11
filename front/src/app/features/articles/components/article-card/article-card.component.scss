@@ -1,6 +1,16 @@
 .article-item{
     flex-basis: 50%;
+    &.details{
+        border: none;
+        box-shadow: none;
+    }
     &:hover{
         cursor: pointer;
+    }
+    .mat-mdc-card-subtitle{
+        margin-bottom: 1rem;
+        .author-item{
+            margin-left: 1rem;
+        }
     }
 }

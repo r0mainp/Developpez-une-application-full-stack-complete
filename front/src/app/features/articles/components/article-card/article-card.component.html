@@ -1,12 +1,13 @@
 <mat-card
     class="article-item"
+    [ngClass]="isDetail?'details':''"
     (click)="goToDetail(article.id)"
 >
     <mat-card-header>
-        <mat-card-title>{{ article.title }}</mat-card-title>
+        <mat-card-title>{{ article.title | titlecase}}</mat-card-title>
         <mat-card-subtitle>
-            <span>Date: {{article.createdAt | date}}</span>
-            <span>
+            <span class="date-item">Date: {{article.createdAt | date: 'YYYY/MM/dd'}}</span>
+            <span class="author-item">
                 Auteur: 
                 <span *ngIf="user$ | async as user; else notFound">
                     {{ user.username }}
