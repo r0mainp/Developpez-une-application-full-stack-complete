@@ -17,9 +17,13 @@
             <mat-label>Titre</mat-label>
             <input matInput formControlName="title">
       </mat-form-field>
-      <mat-form-field class="textarea">
+      <mat-form-field class="textarea-container">
         <mat-label>Textarea</mat-label>
-        <textarea matInput formControlName="content"></textarea>
+        <textarea 
+            matInput 
+            formControlName="content" 
+            class="textarea"
+        ></textarea>
       </mat-form-field>
         <button 
             mat-raised-button 
@@ -27,7 +31,7 @@
             type="submit" 
             [disabled]="form.invalid"
             >
-            S'inscrire
+            Créer
         </button>
     </form>
 </div>

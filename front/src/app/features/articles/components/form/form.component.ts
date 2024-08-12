@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Theme } from 'src/app/features/themes/interfaces/theme';
@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrl: './form.component.scss'
+  styleUrl: './form.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class FormComponent {
 
