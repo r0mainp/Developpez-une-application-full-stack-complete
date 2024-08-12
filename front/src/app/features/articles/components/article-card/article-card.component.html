@@ -1,5 +1,5 @@
 <div
-    [ngClass]="isDetail?'article-wrapper':''"
+    [ngClass]="isDetail?'article-wrapper':'item'"
 >
     <mat-card
         *ngIf="article; else noArticle"
@@ -29,8 +29,8 @@
             </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-            <p>
-                {{ article.content }} 
+            <p class="article-content" ellipsis>
+                {{ article.content}} 
             </p>
         </mat-card-content>
     </mat-card>

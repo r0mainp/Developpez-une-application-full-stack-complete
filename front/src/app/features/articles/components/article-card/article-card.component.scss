@@ -1,22 +1,50 @@
+@import 'mq-mixins';
 .article-wrapper{
     margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: $height-w-header;
+}
+.item{
+    height: 100%;
+    max-height: 300px;
 }
 .article-item{
-    flex-basis: 50%;
+    height: inherit;
+    max-height: 200px;
     &:hover{
         cursor: pointer;
     }
-    &.details{
-        border: none;
-        box-shadow: none;
-        &:hover{
-            cursor:default;
+    .mat-mdc-card-content{
+        height: inherit;
+        max-height: 100px;
+        .article-content{
+            height: inherit;
+            max-height: 100px;
+            overflow: hidden;
+            white-space:pre-wrap;
         }
     }
     .mat-mdc-card-subtitle{
         margin-bottom: 1rem;
         .author-item{
             margin: 0 1rem;
+        }
+    }
+    &.details{
+        border: none;
+        box-shadow: none;
+        height: 100%;
+        flex-grow: 1;
+        &:hover{
+            cursor:default;
+        }
+        .mat-mdc-card-content{
+            height: 100%;
+            .article-content{
+                height: inherit;
+                white-space:pre-wrap;
+            }
         }
     }
 

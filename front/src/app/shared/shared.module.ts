@@ -10,6 +10,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { RouterModule } from '@angular/router';
+import { EllipsisModule } from 'ngx-ellipsis';
 
 const materialModules = [
   MatGridListModule,
@@ -23,13 +24,14 @@ const materialModules = [
 
 @NgModule({
   declarations: [
-    HeaderComponent,
+    HeaderComponent
   ],
   imports: [
     RouterModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    EllipsisModule,
     ...materialModules
   ],
   exports: [
@@ -37,6 +39,7 @@ const materialModules = [
     FormsModule,
     ReactiveFormsModule,
     HeaderComponent,
+    EllipsisModule,
     ...materialModules
   ],
 })
