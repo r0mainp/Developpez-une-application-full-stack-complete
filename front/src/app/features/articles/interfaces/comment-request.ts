@@ -1,5 +1,5 @@
 export interface CommentRequest {
     content: string;
-    article_id: string;
+    article_id: number;
 }
 

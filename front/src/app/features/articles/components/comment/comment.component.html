@@ -15,18 +15,27 @@
             <div class="content">{{comment.content}}</div>
         </div>
     </div>
-    <div class="comment-form">
+    <form 
+        class="comment-form"
+        [formGroup]="form" 
+        (ngSubmit)="submit()"
+    >
         <mat-form-field class="textarea">
-            <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+            <textarea 
+                matInput 
+                formControlName="content" 
+                placeholder="Ecrire un commentaire"
+            ></textarea>
         </mat-form-field>
         <button 
             color="primary"
             mat-fab
             class="submit-btn"
+            [disabled]="form.invalid"
         >
             <mat-icon>send</mat-icon>
         </button>
-    </div>
+    </form>
 </div>
 <ng-template
     #noComment
