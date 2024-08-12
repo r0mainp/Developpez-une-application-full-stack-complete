@@ -1,0 +1,28 @@
+@import 'mq-mixins';
+.themes-container{
+    margin: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .theme-card{
+        flex-basis: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        @include md {
+            flex-basis: calc(50% - 1rem);
+        }
+        .mat-mdc-card-content{
+            height: inherit;
+            max-height: 100px;
+            .theme-content{
+                height: inherit;
+                max-height: 100px;
+                white-space:pre-wrap;
+            }
+        }
+    }
+}
