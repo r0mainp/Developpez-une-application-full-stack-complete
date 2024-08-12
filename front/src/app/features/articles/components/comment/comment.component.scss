@@ -60,9 +60,24 @@
     }
     .comment-form{
         display: flex;
-        align-items: center;
+        align-items: start;
         .textarea{
             flex-grow: 1;
+        }
+        .outside{
+            display: none;
+        }
+        .inside{
+            margin-right: 0.5rem;
+        }
+        @include sm {
+            .outside{
+                display: block;
+                margin-top: 1rem;
+            }
+            .inside{
+                display: none;
+            }
         }
         .submit-btn{
             margin-left: 1rem;
