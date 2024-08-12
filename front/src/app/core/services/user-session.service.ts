@@ -25,7 +25,7 @@ export class UserSessionService implements OnDestroy {
           switchMap((user: User) => {
             if (user) {
               this.logIn(user);
-              this.router.navigate(['/themes']);
+              this.router.navigate(['/feed']);
             }
             return of(null);
           }),

@@ -21,6 +21,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     path: 'themes',
     loadChildren: () => import('./features/themes/themes.module').then(m => m.ThemesModule)
+  },
+  {
+    canActivate: [AuthGuard],
+    path: 'feed',
+    loadChildren: () => import('./features/articles/articles.module').then(m => m.ArticlesModule)
   }
 ];
 

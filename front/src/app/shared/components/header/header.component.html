@@ -1,3 +1,35 @@
 <div id="app-header">
     <img src="/assets/logo_p6.png" alt="logo" id="header-logo"/>
+
+    <div>
+        <a
+            mat-button 
+            color="primary"
+            routerLinkActive="active-link"
+            [routerLink]="['/feed']"
+            class="router-link"
+        >
+            Articles
+        </a>
+        <a 
+            mat-button 
+            color="primary"
+            routerLinkActive="active-link"
+            [routerLink]="['/themes']"
+            class="router-link"
+        >
+            Themes
+        </a>
+    </div>
+</div>
+<div class="back-btn-container">
+    <button 
+        *ngIf="displayBackArrow"
+        mat-icon-button
+        (click)="back()"
+    >
+        <mat-icon>
+            arrow_back
+        </mat-icon>
+    </button>
 </div>

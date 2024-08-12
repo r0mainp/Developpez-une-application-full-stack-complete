@@ -11,6 +11,7 @@ import { AuthModule } from './features/auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
+import { ArticlesModule } from './features/articles/articles.module';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
     CoreModule,
     AuthModule,
     SharedModule,
+    ArticlesModule,
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),

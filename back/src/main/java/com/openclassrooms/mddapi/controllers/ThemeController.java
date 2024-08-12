@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class ThemeController {
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") String id){
         try {
-            Theme theme = this.themeService.findById(Integer.parseInt(id));
+            Optional<Theme> theme = this.themeService.findById(Integer.parseInt(id));
     
             return ResponseEntity.ok().body(theme);
         }catch (NumberFormatException e) {

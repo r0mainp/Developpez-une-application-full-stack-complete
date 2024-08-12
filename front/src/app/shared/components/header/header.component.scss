@@ -1,8 +1,23 @@
 @import 'mq-mixins';
+
 #app-header{
     height: $header-height;
     border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     #header-logo{
         height: 100%;
     }
+    .router-link{
+        color: black;
+    }
+    .active-link{
+        color: var(--mdc-text-button-label-text-color);
+    }
+}
+.back-btn-container{
+    position: absolute;
+    z-index: 2;
+    width: 100%;
 }
