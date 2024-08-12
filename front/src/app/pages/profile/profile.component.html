@@ -1,0 +1,37 @@
+
+<div
+    *ngIf="user$ |async as user"
+    class="profile-container"
+>
+    <h2>Profil utilisateur</h2>
+    <form 
+        class="user-form" 
+        [formGroup]="form" 
+        (ngSubmit)="submit()"
+    >
+        <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input 
+                matInput 
+                formControlName="username"
+            >
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input 
+            matInput 
+            formControlName="email" 
+        >
+        </mat-form-field>
+      
+        <button 
+            mat-raised-button 
+            color="primary" 
+            type="submit" 
+            [disabled]="form.invalid"
+            >
+            Sauvegarder
+        </button>
+    </form>
+    <button mat-button class="logout-btn" (click)="logout()">Se déconnecter</button>
+</div>

@@ -1,7 +1,7 @@
 <div id="app-header">
     <img src="/assets/logo_p6.png" alt="logo" id="header-logo"/>
 
-    <div>
+    <div class="btn-container" *ngIf=" isLogged$ | async ">
         <a
             mat-button 
             color="primary"
@@ -20,7 +20,24 @@
         >
             Themes
         </a>
+        <a 
+            mat-mini-fab 
+            color="primary"
+            [routerLink]="['/profile']"
+            class="profile-link"
+        >
+            <mat-icon>person</mat-icon>
+        </a>
     </div>
+
+    <button 
+        mat-mini-fab 
+        color="primary"
+        class="button-link"
+        (click)="toggleSidenav()"
+    >
+        <mat-icon>menu</mat-icon>
+    </button>
 </div>
 <div class="back-btn-container">
     <button 

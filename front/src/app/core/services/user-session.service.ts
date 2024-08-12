@@ -61,6 +61,7 @@ export class UserSessionService implements OnDestroy {
     localStorage.removeItem('token');
     this.user = undefined;
     this.isLogged = false;
+    this.router.navigate(['/']);
     this.next();
   }
 
