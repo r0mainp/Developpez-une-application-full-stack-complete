@@ -17,6 +17,10 @@ public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
+    public Comment addComment(Comment comment){
+        return this.commentRepository.save(comment);
+    }
+
     public List<CommentDto> getCommentsByArticleId(Integer articleId, Sort sort) {
         List<Comment> comments = commentRepository.findByArticleId(articleId, sort);
         return comments.stream()

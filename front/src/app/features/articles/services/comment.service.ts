@@ -17,6 +17,6 @@ export class CommentService {
   }
 
   public create(request: CommentRequest): Observable<Comment>{
-    return this.httpClient.post<Comment>(`${this.pathService}/`, request);
+    return this.httpClient.post<Comment>(`${this.pathService}/add`, request);
   }
 }

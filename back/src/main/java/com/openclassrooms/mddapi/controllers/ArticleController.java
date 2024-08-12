@@ -60,9 +60,9 @@ public class ArticleController {
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") String id){
         try {
-            ArticleDto article = this.articleService.findById(Integer.parseInt(id));
-    
-            return ResponseEntity.ok().body(article);
+            Article article = this.articleService.findById(Integer.parseInt(id));
+            
+            return ResponseEntity.ok().body(articleMapper.toDto(article));
         }catch (NumberFormatException e) {
             return ResponseEntity.badRequest().build();
         }
@@ -70,13 +70,10 @@ public class ArticleController {
 
     @PostMapping("/create")
     public Article createArticle(@RequestBody ArticleRequest request){
-        System.out.println(request);
         
         User currentUser = this.userService.getCurrentUser();
-        System.out.println(request.getTheme_id());
         Theme relatedTheme = this.themeService.findById(request.getTheme_id())
         .orElse(null);
-        System.out.println(request.getTitle());
         
         Article article = new Article()
         .setAuthor(currentUser)
@@ -84,8 +81,6 @@ public class ArticleController {
         .setTitle(request.getTitle())
         .setContent(request.getContent());
         
-        
-        System.out.println(request.getContent());
         return this.articleService.create(article);
     }
 }

@@ -23,9 +23,8 @@ public class ArticleService {
     private ArticleMapper articleMapper;
 
 
-    public ArticleDto findById(Integer id){
-        Article article = this.articleRepository.findById(id).orElse(null);
-        return article != null ? articleMapper.toDto(article): null;
+    public Article findById(Integer id){
+        return this.articleRepository.findById(id).orElse(null);
     }
 
     public List<ArticleDto> findAllArticlesByUserSubscriptions(Integer userId, Sort sort){
