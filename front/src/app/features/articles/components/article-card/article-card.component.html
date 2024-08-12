@@ -44,11 +44,13 @@
     </div>
     
     <div
-    *ngIf="isDetail"
-    class="comments-part"
+        *ngIf="isDetail && article"
+        class="comments-part"
     >
         <hr>
-        <app-comment></app-comment>
+        <app-comment
+            [articleId]="article.id"
+        ></app-comment>
     </div>
     <ng-template #noArticle>
         <p>No article available.</p>
