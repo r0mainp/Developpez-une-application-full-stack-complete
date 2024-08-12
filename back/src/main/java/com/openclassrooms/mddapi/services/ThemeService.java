@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,8 @@ public class ThemeService {
         return this.themeRepository.findAll();
     }
 
-    public Theme findById(Integer id){
-        return this.themeRepository.findById(id).orElse(null);
+    public Optional<Theme> findById(Integer id){
+        return this.themeRepository.findById(id);
     }
 
 }
