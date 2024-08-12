@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable, tap } from 'rxjs';
 import { User } from 'src/app/core/interfaces/user';
+import { UserRequest } from 'src/app/core/interfaces/user-request';
 import { UserSessionService } from 'src/app/core/services/user-session.service';
+import { UserService } from 'src/app/core/services/user.service';
 import { AuthService } from 'src/app/features/auth/services/auth.service';
 
 @Component({
@@ -26,12 +28,19 @@ export class ProfileComponent implements OnInit{
         Validators.required,
       ]
     ],
+    id: [
+      0,
+      [
+        Validators.required,
+      ]
+    ],
   });
 
   constructor(
     private builder: FormBuilder,
     private authService: AuthService,
-    private userSessionService: UserSessionService
+    private userSessionService: UserSessionService,
+    private userService: UserService
   ){}
 
   ngOnInit() {
@@ -39,14 +48,27 @@ export class ProfileComponent implements OnInit{
       tap(user => this.form.patchValue(
         {
           username: user.username,
-          email: user.email
+          email: user.email,
+          id: user.id
         }
       ))
     );
   }
 
   public submit():void{
-    console.log(this.form.value)
+    const username = this.form.value.username as string;
+    const email = this.form.value.email as string;
+    const id = this.form.value.id as number;
+
+    const request: UserRequest = {
+      username: username,
+      email: email,
+      id: id,
+    }
+
+    this.userService.update(request).subscribe((response)=>{
+      console.log(response)
+    })
   }
   public logout(): void{
     this.userSessionService.logOut();

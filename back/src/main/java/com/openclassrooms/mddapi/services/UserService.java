@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.openclassrooms.mddapi.mapper.UserResponseMapper;
 import com.openclassrooms.mddapi.models.User;
+import com.openclassrooms.mddapi.payload.request.UserRequest;
 import com.openclassrooms.mddapi.payload.response.UserResponse;
 import com.openclassrooms.mddapi.repository.UserRepository;
 
@@ -52,5 +53,15 @@ public class UserService {
             }
         }
         return null;
+    }
+
+    public User updateUser(UserRequest request) {
+        User user = userRepository.findById(request.getId())
+                .orElse(null);
+
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
+
+        return userRepository.save(user);
     }
 }
