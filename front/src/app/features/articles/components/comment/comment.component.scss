@@ -1,0 +1,39 @@
+.comments-wrapper{
+    max-height: 300px;
+    display: flex;
+    flex-direction: column;
+    .title{
+        font-weight: 500;
+    }
+    .comments-container{
+        margin: 1rem;
+        padding: 0.5rem;
+        max-height: 200px;
+        overflow-y: auto;
+        flex-grow: 1;
+        .comment{
+            display: flex;
+            .username{
+                font-weight: 400;
+            }
+            .content{
+                border: 1px solid rgba(0, 0, 0, 0.315);
+                box-shadow: 0 0 0 1px;
+                border-radius: 8px;
+                flex-grow: 1;
+                padding: 1rem;
+                margin: 0 1rem 1rem;
+            }
+        }
+    }
+    .comment-form{
+        display: flex;
+        align-items: center;
+        .textarea{
+            flex-grow: 1;
+        }
+        .submit-btn{
+            margin-left: 1rem;
+        }
+    }
+}

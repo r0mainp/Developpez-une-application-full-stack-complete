@@ -4,10 +4,16 @@
     display: flex;
     flex-direction: column;
     height: $height-w-header;
+    .section{
+        flex-grow: 1;
+    }
 }
 .item{
     height: 100%;
     max-height: 300px;
+    .section{
+        display: none;
+    }
 }
 .article-item{
     height: inherit;
@@ -34,16 +40,18 @@
     &.details{
         border: none;
         box-shadow: none;
-        height: 100%;
-        flex-grow: 1;
+        max-height: 100%;
+        height: fit-content;
         &:hover{
             cursor:default;
         }
         .mat-mdc-card-content{
             height: 100%;
+            max-height: 100%;
             .article-content{
                 height: inherit;
                 white-space:pre-wrap;
+                max-height: 100%;
             }
         }
     }
@@ -51,36 +59,4 @@
 }
 .comments-part{
     margin: 1rem;
-    .comments-wrapper{
-        .title{
-            font-weight: 500;
-        }
-        .comments-container{
-            margin: 1rem;
-            .comment{
-                display: flex;
-                .username{
-                    font-weight: 400;
-                }
-                .content{
-                    border: 1px solid rgba(0, 0, 0, 0.315);
-                    box-shadow: 0 0 0 1px;
-                    border-radius: 8px;
-                    flex-grow: 1;
-                    padding: 1rem;
-                    margin: 0 1rem 1rem;
-                }
-            }
-        }
-        .comment-form{
-            display: flex;
-            align-items: center;
-            .textarea{
-                flex-grow: 1;
-            }
-            .submit-btn{
-                margin-left: 1rem;
-            }
-        }
-    }
 }

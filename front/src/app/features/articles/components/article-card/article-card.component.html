@@ -29,44 +29,27 @@
             </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-            <p class="article-content" ellipsis>
-                {{ article.content}} 
-            </p>
+            <p *ngIf="!isDetail; else noEllipsis" class="article-content" ellipsis>
+                {{ article.content }}
+              </p>
+              <ng-template #noEllipsis>
+                <p class="article-content">
+                  {{ article.content }}
+                </p>
+              </ng-template>
         </mat-card-content>
     </mat-card>
+    
+    <div class="section">
+    </div>
+    
     <div
-        *ngIf="isDetail"
-        class="comments-part"
+    *ngIf="isDetail"
+    class="comments-part"
     >
         <hr>
-        <div class="comments-wrapper">
-            <h3 class="title">Commentaires</h3>
-            <div class="comments-container">
-                <div class="comment">
-                    <span class="username">Username</span>
-                    <div class="content">Contenu du commentaire</div>
-                </div>
-                <div class="comment">
-                    <span class="username">Username</span>
-                    <div class="content">Contenu du commentaire</div>
-                </div>
-            </div>
-            <div class="comment-form">
-                <mat-form-field class="textarea">
-                    <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-                </mat-form-field>
-                <button 
-                    color="primary"
-                    mat-fab
-                    class="submit-btn"
-                >
-                    <mat-icon>send</mat-icon>
-                </button>
-            </div>
-        </div>
+        <app-comment></app-comment>
     </div>
-
-
     <ng-template #noArticle>
         <p>No article available.</p>
     </ng-template>

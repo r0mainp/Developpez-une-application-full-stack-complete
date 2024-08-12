@@ -51,7 +51,7 @@ export class FormComponent {
       const articleRequest = this.form.value as ArticleRequest;
       this.articleService.create(articleRequest).subscribe((article: Article) =>{
           if(article){
-            this.router.navigate([`/articles/${article.id}`]);
+            this.router.navigate([`/details/${article.id}`]);
           }else{
             //TODO: handle error
             console.error(article)
