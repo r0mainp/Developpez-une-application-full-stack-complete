@@ -15,8 +15,4 @@ public interface ArticleMapper {
     @Mapping(source = "theme.id", target = "themeId")
     @Mapping(source = "author.id", target = "authorId")
     ArticleDto toDto(Article article);
-
-    @Mapping(source = "themeId", target = "theme.id")
-    @Mapping(source = "authorId", target = "author.id")
-    Article toEntity(ArticleDto articleDto);
 }
