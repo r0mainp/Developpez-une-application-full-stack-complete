@@ -73,6 +73,11 @@ public class User implements UserDetails{
     @JsonBackReference
     private Set<Article> articles = new HashSet<>();
 
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @Builder.Default
+    @JsonBackReference
+    private Set<Comment> comments = new HashSet<>();
+
     @Override
     public String getUsername() {
         return this.email;
