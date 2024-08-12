@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
@@ -8,7 +8,7 @@ import { filter } from 'rxjs';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit{ 
-
+  @Output() sidenavToggle = new EventEmitter<void>();
   public displayBackArrow: boolean = false;
   public routesToHideBack: string[] = [
     "/",
@@ -30,5 +30,9 @@ export class HeaderComponent implements OnInit{
   
   public back() {
     window.history.back();
+  }
+
+  public toggleSidenav() {
+    this.sidenavToggle.emit();
   }
 }

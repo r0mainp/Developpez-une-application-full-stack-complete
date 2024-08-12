@@ -9,11 +9,24 @@
     #header-logo{
         height: 100%;
     }
-    .router-link{
-        color: black;
+    .btn-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        display: none;
+        .button-link{
+            margin-right: 1rem;
+        }
+        .router-link{
+            color: black;
+        }
+        .active-link{
+            color: var(--mdc-text-button-label-text-color);
+        }
     }
-    .active-link{
-        color: var(--mdc-text-button-label-text-color);
+    .button-link{
+        margin-right: 1rem;
+        position: relative;
     }
 }
 .back-btn-container{
