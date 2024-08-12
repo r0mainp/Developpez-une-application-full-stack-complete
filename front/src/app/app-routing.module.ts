@@ -4,6 +4,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { UnauthGuard } from './core/guards/unauth.guard';
 import { AuthGuard } from './core/guards/auth.guard';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { ListComponent } from './pages/theme-list/theme-list.component';
 
 // consider a guard combined with canLoad / canActivate route option
 // to manage unauthenticated user to access private routes
@@ -21,7 +22,7 @@ const routes: Routes = [
   {
     canActivate: [AuthGuard],
     path: 'themes',
-    loadChildren: () => import('./features/themes/themes.module').then(m => m.ThemesModule)
+    component: ListComponent,
   },
   {
     canActivate: [AuthGuard],

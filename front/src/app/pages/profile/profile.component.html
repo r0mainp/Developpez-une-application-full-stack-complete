@@ -35,3 +35,11 @@
     </form>
     <button mat-button class="logout-btn" (click)="logout()">Se déconnecter</button>
 </div>
+<hr>
+<div>
+    <theme-card
+        *ngFor="let subscription of (subscriptions$ | async)"
+    >
+        
+    </theme-card>
+</div>

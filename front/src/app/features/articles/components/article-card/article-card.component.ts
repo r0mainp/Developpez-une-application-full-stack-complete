@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/core/interfaces/user';
 import { UserService } from 'src/app/core/services/user.service';
-import { ThemeApiService } from 'src/app/features/themes/services/theme-api.service';
-import { Theme } from 'src/app/features/themes/interfaces/theme';
+import { Theme } from 'src/app/features/articles/interfaces/theme';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'article-card',
@@ -20,7 +20,7 @@ export class ArticleCardComponent implements OnChanges{
 
   constructor(
     private userService: UserService,
-    private themeService: ThemeApiService,
+    private themeService: ThemeService,
     private router: Router,
   ){}
 

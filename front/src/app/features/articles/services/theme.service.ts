@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ThemeApiService {
+export class ThemeService {
 
   private pathService = 'api/theme';
 

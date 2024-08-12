@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable, tap } from 'rxjs';
+import { Subscription } from 'src/app/core/interfaces/subscription';
 import { User } from 'src/app/core/interfaces/user';
 import { UserRequest } from 'src/app/core/interfaces/user-request';
 import { UserSessionService } from 'src/app/core/services/user-session.service';
@@ -14,6 +15,7 @@ import { AuthService } from 'src/app/features/auth/services/auth.service';
 })
 export class ProfileComponent implements OnInit{
   public user$!: Observable<User>;
+  public subscriptions$!: Observable<Subscription[]>;
 
   public form = this.builder.group({
     username: [
