@@ -28,11 +28,11 @@ public class ArticleRequest {
         this.content = content;
     }
 
-    public Integer getThemeId() {
+    public Integer getTheme_id() {
         return theme_id;
     }
 
-    public void setThemeId(Integer theme_id) {
+    public void setTheme_idd(Integer theme_id) {
         this.theme_id = theme_id;
     }
 

@@ -37,7 +37,6 @@ public class ArticleService {
                        .collect(Collectors.toList());
     }
 
-    // TODO: handle request or Dto later
     public Article create(Article article){
         return this.articleRepository.save(article);
     }
