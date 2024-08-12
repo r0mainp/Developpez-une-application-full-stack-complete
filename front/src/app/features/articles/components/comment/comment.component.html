@@ -1,7 +1,10 @@
-<div class="comments-wrapper">
+<div 
+*ngIf="comments$ | async as comments; else noComment"
+    class="comments-wrapper"
+>
     <h3 class="title">Commentaires</h3>
     <div 
-        *ngIf="comments$ | async as comments; else noComment"
+        *ngIf="comments.length > 0; else noComment"
         class="comments-container"
     >
         <div 
@@ -12,15 +15,6 @@
             <div class="content">{{comment.content}}</div>
         </div>
     </div>
-    <ng-template
-        #noComment
-    >
-        <div 
-            class="comments-container"
-        >
-            Aucun commentaire
-        </div>    
-    </ng-template>
     <div class="comment-form">
         <mat-form-field class="textarea">
             <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
@@ -34,3 +28,12 @@
         </button>
     </div>
 </div>
+<ng-template
+    #noComment
+>
+    <div 
+        class="comments-container"
+    >
+        Aucun commentaire
+    </div>    
+</ng-template>
