@@ -1,3 +1,5 @@
+$screen-xs-min: 376px;
+
 // Small tablets and large smartphones (landscape view)
 $screen-sm-min: 576px;
 
@@ -12,8 +14,17 @@ $screen-xl-min: 1200px;
 
 $header-height: 70px;
 
-$height-w-header: calc(100vh - ($header-height + 4rem + 1px));
+$margins: 2.5rem;
 
+$height-w-header: calc(100vh - ($header-height + $margins + 1px));
+
+
+// Small devices
+@mixin xs {
+    @media (min-width: #{$screen-xs-min}) {
+        @content;
+    }
+ }
 
 // Small devices
 @mixin sm {
@@ -49,3 +60,7 @@ $height-w-header: calc(100vh - ($header-height + 4rem + 1px));
         @content;
     }
  }
+
+@include xs {
+    $margins: 4rem;
+}

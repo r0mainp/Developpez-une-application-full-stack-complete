@@ -26,15 +26,16 @@
                 formControlName="content" 
                 placeholder="Ecrire un commentaire"
             ></textarea>
+            <button 
+                color="primary"
+                mat-fab
+                matSuffix
+                class="submit-btn"
+                [disabled]="form.invalid"
+            >
+                <mat-icon>send</mat-icon>
+            </button>
         </mat-form-field>
-        <button 
-            color="primary"
-            mat-fab
-            class="submit-btn"
-            [disabled]="form.invalid"
-        >
-            <mat-icon>send</mat-icon>
-        </button>
     </form>
 </div>
 <ng-template

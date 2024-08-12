@@ -1,9 +1,12 @@
 @import 'mq-mixins';
 .article-wrapper{
-    margin: 1rem;
+    margin: 2rem 0.5rem 0.5rem;
     display: flex;
     flex-direction: column;
     height: $height-w-header;
+    @include xs {
+        margin: 2rem;
+    }
     .section{
         flex-grow: 1;
     }
@@ -42,6 +45,7 @@
         box-shadow: none;
         max-height: 100%;
         height: fit-content;
+        overflow-y: auto;
         &:hover{
             cursor:default;
         }
