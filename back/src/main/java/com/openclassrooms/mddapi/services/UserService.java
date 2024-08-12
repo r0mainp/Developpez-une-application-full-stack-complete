@@ -26,7 +26,7 @@ public class UserService {
         return userRepository.findById(id).map(userResponseMapper::toUserResponse);
     }
 
-    public UserResponse getCurrentUser() {
+    public UserResponse getSafeCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
             Object principal = authentication.getPrincipal();
@@ -35,6 +35,20 @@ public class UserService {
                 String username = ((UserDetails) principal).getUsername();
                 User user = userRepository.findByEmail(username).orElse(null);
                 return userResponseMapper.toUserResponse(user);
+            }
+        }
+        return null;
+    }
+
+    public User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            
+            if (principal instanceof UserDetails) {
+                String username = ((UserDetails) principal).getUsername();
+                User user = userRepository.findByEmail(username).orElse(null);
+                return user;
             }
         }
         return null;
