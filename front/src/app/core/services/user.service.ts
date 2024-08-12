@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 import { User } from '../interfaces/user';
 import { UserRequest } from '../interfaces/user-request';
-import { UpdateSuccess } from '../interfaces/update-success';
+import { GenericResponse} from '../interfaces/generic-response';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class UserService {
     return this.httpClient.get<User>(`${this.pathService}/${id}`);
   }
 
-  public update(userRequest: UserRequest): Observable<UpdateSuccess> {
-    return this.httpClient.put<UpdateSuccess>(`${this.pathService}/`, userRequest);
+  public update(userRequest: UserRequest): Observable<GenericResponse> {
+    return this.httpClient.put<GenericResponse>(`${this.pathService}/`, userRequest);
   }
 }
