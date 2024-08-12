@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.openclassrooms.mddapi.models.Comment;
+import com.openclassrooms.mddapi.dto.CommentDto;
 import com.openclassrooms.mddapi.services.CommentService;
 
 @RestController
@@ -21,13 +21,12 @@ public class CommentController {
     CommentService commentService;
 
     @GetMapping()
-    public ResponseEntity<List<Comment>> findAllCommentByArticle(
-        @RequestParam Integer articleId,
-        @RequestParam(defaultValue = "asc") String sort
-    ){
+    public ResponseEntity<List<CommentDto>> findAllCommentByArticle(
+            @RequestParam Integer articleId,
+            @RequestParam(defaultValue = "asc") String sort
+    ) {
         Sort sortOrder = Sort.by(Sort.Order.by("createdAt").with(Sort.Direction.fromString(sort)));
-        List<Comment> comments = this.commentService.getCommentsByArticleId(articleId, sortOrder);
-
-        return ResponseEntity.ok().body(comments);
+        List<CommentDto> comments = commentService.getCommentsByArticleId(articleId, sortOrder);
+        return ResponseEntity.ok(comments);
     }
 }
