@@ -30,7 +30,6 @@
         .article-content{
             height: inherit;
             max-height: 100px;
-            overflow: hidden;
             white-space:pre-wrap;
         }
     }
@@ -45,7 +44,7 @@
         box-shadow: none;
         max-height: 100%;
         height: fit-content;
-        overflow-y: auto;
+        overflow-y: hidden;
         &:hover{
             cursor:default;
         }
@@ -53,6 +52,7 @@
             height: 100%;
             max-height: 100%;
             .article-content{
+                overflow-y: auto;
                 height: inherit;
                 white-space:pre-wrap;
                 max-height: 100%;
