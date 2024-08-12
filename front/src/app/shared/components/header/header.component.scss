@@ -10,11 +10,13 @@
         height: 100%;
     }
     .btn-container{
-        display: flex;
         justify-content: center;
         align-items: center;
         display: none;
-        .button-link{
+        @include md {
+            display: flex;
+        }
+        .profile-link{
             margin-right: 1rem;
         }
         .router-link{
@@ -27,6 +29,9 @@
     .button-link{
         margin-right: 1rem;
         position: relative;
+        @include md {
+            display: none;
+        }
     }
 }
 .back-btn-container{

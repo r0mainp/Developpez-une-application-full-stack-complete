@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { filter, Observable } from 'rxjs';
+import { UserSessionService } from 'src/app/core/services/user-session.service';
 
 @Component({
   selector: 'app-header',
@@ -17,9 +18,17 @@ export class HeaderComponent implements OnInit{
     // add profile when implemented
   ]
 
-  constructor(private router: Router){}
+  public isLogged$: Observable<boolean> = this.userSessionService.$isLogged();
+
+  constructor(
+    private router: Router,
+    private userSessionService: UserSessionService
+  ){}
 
   ngOnInit(): void {
+
+
+
     this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
