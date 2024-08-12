@@ -15,11 +15,11 @@ export class SubscriptionService {
     return this.httpClient.get<Subscription[]>(`${this.pathService}`);
   }
 
-  public subscribe(articleId: number): Observable<GenericResponse> {
-    return this.httpClient.post<GenericResponse>(`${this.pathService}/subscribe`, articleId);
+  public subscribe(themeId: number): Observable<GenericResponse> {
+    return this.httpClient.post<GenericResponse>(`${this.pathService}/subscribe`, themeId);
   }
 
-  public unSubscribe(articleId: number): Observable<GenericResponse> {
-    return this.httpClient.post<GenericResponse>(`${this.pathService}/unsubscribe`, articleId);
+  public unSubscribe(themeId: number): Observable<GenericResponse> {
+    return this.httpClient.post<GenericResponse>(`${this.pathService}/unsubscribe`, themeId);
   }
 }
