@@ -36,6 +36,9 @@
     <div
         class="articles-container"
     >
+        <div *ngIf="(articles$ | async)?.length === 0" class="no-articles-message">
+            Abonnez-vous à un thèmes pour en voir les articles.
+        </div>
         <article-card
             *ngFor="let article of (articles$ | async)"
             [article]="article"
