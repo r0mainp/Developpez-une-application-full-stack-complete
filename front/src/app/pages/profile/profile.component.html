@@ -46,6 +46,7 @@
             <theme-card 
                 *ngIf="subscription.theme" 
                 [theme]="subscription.theme"
+                (refreshSubscriptions)="handleRefresh()"
             ></theme-card>
           </div>
     </div>

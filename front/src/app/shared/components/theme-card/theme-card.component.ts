@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Theme } from '../../../features/articles/interfaces/theme';
 import { SubscriptionService } from 'src/app/core/services/subscription.service';
 import { SubscriptionRequest } from 'src/app/core/interfaces/subscription-request';
@@ -13,6 +13,9 @@ import { UnsubscriptionRequest } from 'src/app/core/interfaces/unsubscription-re
 export class ThemeCardComponent implements OnInit{
   @Input() public theme!: Theme;
   @Input() public isThemePage: boolean = false;
+
+  @Output() public refreshSubscriptions = new EventEmitter<void>();
+
   public subscriptionId: number | undefined;
 
   public isSubscribed$: Observable<boolean> = of(false);
@@ -22,11 +25,14 @@ export class ThemeCardComponent implements OnInit{
   ){}
 
   ngOnInit() {
+    this.checkIfUserIsSubscribed()
+  }
+
+  public checkIfUserIsSubscribed(){
     this.isSubscribed$ = this.subscriptionService.all().pipe(
       map(subscriptions => {
         const subscription = subscriptions.find(sub => sub.theme_id === this.theme.id);
         if (subscription) {
-          console.log(subscription)
           this.subscriptionId = subscription.id;
           return true;
         }
@@ -41,7 +47,7 @@ export class ThemeCardComponent implements OnInit{
     }
     this.subscriptionService.subscribe(request).subscribe((response) =>  {
       console.log(response)
-      this.ngOnInit();
+      this.checkIfUserIsSubscribed()
     })
   }
 
@@ -53,6 +59,9 @@ export class ThemeCardComponent implements OnInit{
     const request: UnsubscriptionRequest={
       id: this.subscriptionId,
     }
-    this.subscriptionService.unSubscribe(request).subscribe((response) =>  console.log(response))
+    this.subscriptionService.unSubscribe(request).subscribe((response) => {
+      console.log(response)
+      this.refreshSubscriptions.emit();
+    })
   }
 }

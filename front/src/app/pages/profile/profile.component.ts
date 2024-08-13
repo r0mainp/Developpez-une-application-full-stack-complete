@@ -64,6 +64,13 @@ export class ProfileComponent implements OnInit{
     const subscriptions$ = this.subscriptionService.all();
     const themes$ = this.themeService.all();
 
+    this.loadSubscriptionsWithThemes();
+  }
+
+  private loadSubscriptionsWithThemes() {
+    const subscriptions$ = this.subscriptionService.all();
+    const themes$ = this.themeService.all();
+
     this.subscriptionsWithThemes$ = combineLatest([subscriptions$, themes$]).pipe(
       map(([subscriptions, themes]) => {
         return subscriptions.map(subscription => {
@@ -94,5 +101,9 @@ export class ProfileComponent implements OnInit{
   }
   public logout(): void{
     this.userSessionService.logOut();
+  }
+
+  public handleRefresh() {
+    this.loadSubscriptionsWithThemes();
   }
 }
