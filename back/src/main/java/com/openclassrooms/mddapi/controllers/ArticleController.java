@@ -23,24 +23,34 @@ import com.openclassrooms.mddapi.services.ArticleService;
 import com.openclassrooms.mddapi.services.ThemeService;
 import com.openclassrooms.mddapi.services.UserService;
 
+/**
+ * Controller for managing articles.
+ * Provides endpoints to handle article-related operations such as retrieving and creating articles.
+ */
 @RestController
 @RequestMapping("/api/article")
 public class ArticleController {
 
     @Autowired
-    ThemeService themeService;
+    private ThemeService themeService;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    ArticleService articleService;
+    private ArticleService articleService;
 
     @Autowired
-    ArticleMapper articleMapper;
+    private ArticleMapper articleMapper;
 
-
-    @GetMapping()
+    /**
+     * Retrieves all articles based on the current user's subscriptions.
+     * 
+     * @param sort Optional parameter to specify the sorting order of the articles.
+     *             Defaults to "desc" (descending) if not provided.
+     * @return ResponseEntity containing a list of {@link ArticleDto} objects representing the articles.
+     */
+    @GetMapping
     public ResponseEntity<?> findAllArticleFromSubscribedThemes(
         @RequestParam(defaultValue = "desc") String sort
     ) {
@@ -50,6 +60,12 @@ public class ArticleController {
         return ResponseEntity.ok(articles);
     }
 
+    /**
+     * Retrieves a specific article by its ID.
+     * 
+     * @param id The ID of the article to retrieve.
+     * @return ResponseEntity containing the {@link ArticleDto} object if found, or a bad request response if the ID is invalid.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") String id){
         try {
@@ -61,6 +77,12 @@ public class ArticleController {
         }
     }
 
+    /**
+     * Creates a new article.
+     * 
+     * @param request The {@link ArticleRequest} object containing the details of the article to be created.
+     * @return The created {@link Article} object.
+     */
     @PostMapping("/create")
     public Article createArticle(@RequestBody ArticleRequest request){
         

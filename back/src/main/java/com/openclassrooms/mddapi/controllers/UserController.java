@@ -17,14 +17,27 @@ import com.openclassrooms.mddapi.payload.response.GenericResponse;
 import com.openclassrooms.mddapi.payload.response.UserResponse;
 import com.openclassrooms.mddapi.services.UserService;
 
+/**
+ * Controller for managing user information.
+ * Provides endpoints for retrieving user details by ID and updating user information.
+ */
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-    @Autowired
-    UserService userService;
 
+    @Autowired
+    private UserService userService;
+
+    /**
+     * Retrieves user details by user ID.
+     * 
+     * @param id The ID of the user to retrieve.
+     * @return ResponseEntity containing a {@link UserResponse} object if the user is found,
+     *         or a 404 Not Found status if the user does not exist,
+     *         or a 400 Bad Request status if the ID format is invalid.
+     */
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable("id") String id){
+    public ResponseEntity<?> findById(@PathVariable("id") String id) {
         try {
             Optional<UserResponse> userResponse = this.userService.getUserById(Integer.parseInt(id));
             if (userResponse.isPresent()) {
@@ -37,6 +50,13 @@ public class UserController {
         }
     }
 
+    /**
+     * Updates user information based on the provided user request.
+     * 
+     * @param request The {@link UserRequest} object containing the user information to be updated.
+     * @return ResponseEntity containing a {@link GenericResponse} with a success message if the update is successful,
+     *         or a 500 Internal Server Error status with an error message if an exception occurs during the update process.
+     */
     @PutMapping("/")
     public ResponseEntity<?> updateUser(@RequestBody UserRequest request) {
         try {

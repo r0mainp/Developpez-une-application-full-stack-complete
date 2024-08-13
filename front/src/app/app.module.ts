@@ -15,9 +15,47 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { ListComponent } from './pages/theme-list/theme-list.component';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
-
+/**
+ * The main module for the application.
+ * 
+ * @remarks
+ * This module imports necessary Angular modules and application-specific modules,
+ * declares the components used in the application, and provides HTTP interceptors
+ * for handling authentication and authorization.
+ * 
+ * @module
+ */
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ProfileComponent, ListComponent],
+  /**
+   * Declarations of components that belong to this module.
+   * 
+   * @remarks
+   * The components declared here are:
+   * - {@link AppComponent} - The root component of the application.
+   * - {@link HomeComponent} - The home page component.
+   * - {@link ProfileComponent} - The user profile page component.
+   * - {@link ListComponent} - The component for listing themes.
+   */
+  declarations: [
+    AppComponent, 
+    HomeComponent, 
+    ProfileComponent, 
+    ListComponent
+  ],
+  
+  /**
+   * Modules that are imported into this module.
+   * 
+   * @remarks
+   * The following modules are imported:
+   * - {@link BrowserModule} - Provides services for running the application in a browser.
+   * - {@link AppRoutingModule} - Configures application routes.
+   * - {@link BrowserAnimationsModule} - Enables animations in Angular.
+   * - {@link CoreModule} - Core functionalities of the application.
+   * - {@link AuthModule} - Authentication-related components and services.
+   * - {@link SharedModule} - Shared components, directives, and pipes.
+   * - {@link ArticlesModule} - Module for handling articles.
+   */
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,11 +65,28 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
     SharedModule,
     ArticlesModule,
   ],
+  
+  /**
+   * Providers for the module.
+   * 
+   * @remarks
+   * The following providers are configured:
+   * - `provideHttpClient(withInterceptorsFromDi())` - Configures HTTP client with dependency-injected interceptors.
+   * - `JwtInterceptor` - Intercepts HTTP requests to add JWT tokens.
+   * - `AuthInterceptor` - Intercepts HTTP requests to handle authentication.
+   */
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
+  
+  /**
+   * The root component that Angular creates and inserts into the `index.html` host web page.
+   * 
+   * @remarks
+   * The {@link AppComponent} is bootstrapped as the root component of the application.
+   */
   bootstrap: [AppComponent],
 })
 export class AppModule {}
