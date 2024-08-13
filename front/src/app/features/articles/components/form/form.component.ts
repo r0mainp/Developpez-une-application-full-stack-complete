@@ -7,6 +7,7 @@ import { ArticleService } from '../../services/article.service';
 import { Article } from '../../interfaces/article';
 import { Router } from '@angular/router';
 import { ThemeService } from '../../../../core/services/theme.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-form',
@@ -43,6 +44,7 @@ export class FormComponent {
     private themeService: ThemeService,
     private articleService: ArticleService,
     private router: Router,
+    private matSnackBar: MatSnackBar,
   ){}
 
   public submit(): void{
@@ -51,7 +53,8 @@ export class FormComponent {
       const articleRequest = this.form.value as ArticleRequest;
       this.articleService.create(articleRequest).subscribe((article: Article) =>{
           if(article){
-            this.router.navigate([`/details/${article.id}`]);
+            this.router.navigate([`/feed`]);
+            this.matSnackBar.open("Article créé", "Close", { duration: 3000 });
           }else{
             //TODO: handle error
             console.error(article)
