@@ -13,7 +13,7 @@ export class SubscriptionService {
   constructor(private httpClient: HttpClient) { }
 
   public all(): Observable<Subscription[]> {
-    return this.httpClient.get<Subscription[]>(`${this.pathService}`);
+    return this.httpClient.get<Subscription[]>(`${this.pathService}/`);
   }
 
   public subscribe(request:SubscriptionRequest): Observable<GenericResponse> {

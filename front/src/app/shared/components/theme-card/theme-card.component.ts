@@ -8,7 +8,7 @@ import { SubscriptionRequest } from 'src/app/core/interfaces/subscription-reques
   templateUrl: './theme-card.component.html',
   styleUrl: './theme-card.component.scss'
 })
-export class ThemeCardComponent {
+export class ThemeCardComponent{
   @Input() public theme!: Theme;
   @Input() public isThemePage: boolean = false;
 

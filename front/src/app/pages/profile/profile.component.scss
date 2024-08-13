@@ -1,19 +1,20 @@
 @import 'mq-mixins';
-.profile-container{
-    display: flex;
-    flex-direction: column;
-    // justify-content: center;
-    align-items: center;
+.profile-wrapper{
     margin: 2rem;
     height: $height-w-header;
-    .user-form{
+    .profile-container{
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
+        .user-form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .logout-btn{
+            color: rgb(224, 25, 10);
+        }
+    
     }
-    .logout-btn{
-        color: rgb(224, 25, 10);
-    }
-
 }

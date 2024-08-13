@@ -1,48 +1,50 @@
-
 <div
-    *ngIf="user$ |async as user"
-    class="profile-container"
+    class="profile-wrapper"
 >
-    <h2>Profil utilisateur</h2>
-    <form 
-        class="user-form" 
-        [formGroup]="form" 
-        (ngSubmit)="submit()"
-    >
-        <mat-form-field>
-            <mat-label>Username</mat-label>
-            <input 
-                matInput 
-                formControlName="username"
-            >
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Email</mat-label>
-            <input 
-            matInput 
-            formControlName="email" 
-        >
-        </mat-form-field>
-      
-        <button 
-            mat-raised-button 
-            color="primary" 
-            type="submit" 
-            [disabled]="form.invalid"
-            >
-            Sauvegarder
-        </button>
-    </form>
-    <button mat-button class="logout-btn" (click)="logout()">Se déconnecter</button>
-</div>
-<hr>
-<div>
+
     <div
-        *ngFor="let subscription of (subscriptions$ | async)"
+        *ngIf="user$ |async as user"
+        class="profile-container"
     >
-        <theme-card       
-            *ngIf="(getTheme(subscription) | async) as theme"
-            [theme]="theme"
-        ></theme-card>
+        <h2>Profil utilisateur</h2>
+        <form 
+            class="user-form" 
+            [formGroup]="form" 
+            (ngSubmit)="submit()"
+        >
+            <mat-form-field>
+                <mat-label>Username</mat-label>
+                <input 
+                    matInput 
+                    formControlName="username"
+                >
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input 
+                matInput 
+                formControlName="email" 
+            >
+            </mat-form-field>
+          
+            <button 
+                mat-raised-button 
+                color="primary" 
+                type="submit" 
+                [disabled]="form.invalid"
+                >
+                Sauvegarder
+            </button>
+        </form>
+        <button mat-button class="logout-btn" (click)="logout()">Se déconnecter</button>
+    </div>
+    <hr>
+    <div>
+        <div>
+            TEST
+        </div>
+        <div *ngFor="let subscription of subscriptionsWithThemes$ | async">
+            <theme-card *ngIf="subscription.theme" [theme]="subscription.theme"></theme-card>
+          </div>
     </div>
 </div>
