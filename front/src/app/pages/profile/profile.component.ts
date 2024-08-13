@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Observable, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { Subscription } from 'src/app/core/interfaces/subscription';
 import { User } from 'src/app/core/interfaces/user';
 import { UserRequest } from 'src/app/core/interfaces/user-request';
 import { UserSessionService } from 'src/app/core/services/user-session.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { Theme } from 'src/app/features/articles/interfaces/theme';
+import { ThemeService } from 'src/app/core/services/theme.service';
 import { AuthService } from 'src/app/features/auth/services/auth.service';
 
 @Component({
@@ -16,6 +18,7 @@ import { AuthService } from 'src/app/features/auth/services/auth.service';
 export class ProfileComponent implements OnInit{
   public user$!: Observable<User>;
   public subscriptions$!: Observable<Subscription[]>;
+  public themes$!: Observable<Theme[]>;
 
   public form = this.builder.group({
     username: [
@@ -42,7 +45,8 @@ export class ProfileComponent implements OnInit{
     private builder: FormBuilder,
     private authService: AuthService,
     private userSessionService: UserSessionService,
-    private userService: UserService
+    private userService: UserService,
+    private themeService: ThemeService,
   ){}
 
   ngOnInit() {
@@ -55,6 +59,8 @@ export class ProfileComponent implements OnInit{
         }
       ))
     );
+
+    this.themeService.all();
   }
 
   public submit():void{
@@ -74,5 +80,11 @@ export class ProfileComponent implements OnInit{
   }
   public logout(): void{
     this.userSessionService.logOut();
+  }
+
+  getTheme(subscription: Subscription):Observable<Theme | undefined>{
+    return this.themes$.pipe(
+      map(themes => themes.find(theme => theme.id === subscription.theme_id))
+    );
   }
 }

@@ -6,7 +6,7 @@ import { ArticleRequest } from '../../interfaces/article-request';
 import { ArticleService } from '../../services/article.service';
 import { Article } from '../../interfaces/article';
 import { Router } from '@angular/router';
-import { ThemeService } from '../../services/theme.service';
+import { ThemeService } from '../../../../core/services/theme.service';
 
 @Component({
   selector: 'app-form',

@@ -37,9 +37,12 @@
 </div>
 <hr>
 <div>
-    <theme-card
+    <div
         *ngFor="let subscription of (subscriptions$ | async)"
     >
-        
-    </theme-card>
+        <theme-card       
+            *ngIf="(getTheme(subscription) | async) as theme"
+            [theme]="theme"
+        ></theme-card>
+    </div>
 </div>

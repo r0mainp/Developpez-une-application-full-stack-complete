@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { User } from 'src/app/core/interfaces/user';
 import { UserService } from 'src/app/core/services/user.service';
 import { Theme } from 'src/app/features/articles/interfaces/theme';
-import { ThemeService } from '../../services/theme.service';
+import { ThemeService } from '../../../../core/services/theme.service';
 
 @Component({
   selector: 'article-card',

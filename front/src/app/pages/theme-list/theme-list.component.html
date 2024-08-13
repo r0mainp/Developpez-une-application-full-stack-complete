@@ -2,5 +2,6 @@
    <theme-card
         *ngFor="let theme of (themes$ | async)"
         [theme]="theme"
+        [isThemePage]="true"
    ></theme-card>
 </div>

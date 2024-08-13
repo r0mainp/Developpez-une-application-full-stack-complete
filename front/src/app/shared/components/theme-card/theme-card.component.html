@@ -11,11 +11,23 @@
 </mat-card-content>
 <mat-card-actions>
     <button 
+        *ngIf="isThemePage; else profilePage"
         mat-raised-button 
         color="primary"
         (click)="subscribe(theme.id)"
     >
         S'abonner
     </button>
+    <ng-template
+        #profilePage
+    >
+        <button 
+            mat-raised-button 
+            color="primary"
+            (click)="unubscribe(theme.id)"
+        >
+            Se désabonner
+        </button>
+    </ng-template>
 </mat-card-actions>
 </mat-card>
