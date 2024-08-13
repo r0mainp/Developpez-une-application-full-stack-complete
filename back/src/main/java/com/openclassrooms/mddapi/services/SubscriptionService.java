@@ -48,7 +48,6 @@ public class SubscriptionService {
     }
 
     public void unsubscribe(UnsubscriptionRequest request){
-        System.out.println("DELETYE" + request.getId());
         Subscription subscription = this.subscriptionRepository.findById(request.getId()).orElse(null);
         this.subscriptionRepository.delete(subscription);
     }

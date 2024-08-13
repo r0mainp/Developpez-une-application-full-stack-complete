@@ -43,7 +43,6 @@ public class SubscriptionController {
 
     @PostMapping("/unsubscribe")
     public ResponseEntity<GenericResponse> unsubscribe(@RequestBody UnsubscriptionRequest request){
-        System.out.println("DELETYE" + request.getId());
         try{
             this.subscriptionService.unsubscribe(request);
             GenericResponse response = new GenericResponse("Vous vous êtes désabonné");
