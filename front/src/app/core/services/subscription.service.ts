@@ -4,6 +4,7 @@ import { Observable} from 'rxjs';
 import { Subscription } from '../interfaces/subscription';
 import { GenericResponse } from '../interfaces/generic-response';
 import { SubscriptionRequest } from '../interfaces/subscription-request';
+import { UnsubscriptionRequest } from '../interfaces/unsubscription-request';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class SubscriptionService {
     return this.httpClient.post<GenericResponse>(`${this.pathService}/subscribe`, request);
   }
 
-  public unSubscribe(request:SubscriptionRequest): Observable<GenericResponse> {
+  public unSubscribe(request:UnsubscriptionRequest): Observable<GenericResponse> {
     return this.httpClient.post<GenericResponse>(`${this.pathService}/unsubscribe`, request);
   }
 }

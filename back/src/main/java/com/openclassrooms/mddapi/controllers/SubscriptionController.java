@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.mddapi.models.Subscription;
 import com.openclassrooms.mddapi.payload.request.SubscriptionRequest;
+import com.openclassrooms.mddapi.payload.request.UnsubscriptionRequest;
+import com.openclassrooms.mddapi.payload.response.GenericResponse;
 import com.openclassrooms.mddapi.payload.response.SubscriptionResponse;
 import com.openclassrooms.mddapi.services.SubscriptionService;
 
@@ -31,5 +33,18 @@ public class SubscriptionController {
     @PostMapping("/subscribe")
     public Subscription subscribe(@RequestBody SubscriptionRequest request){
         return this.subscriptionService.subscribe(request);
+    }
+
+    @PostMapping("/unsubscribe")
+    public ResponseEntity<GenericResponse> unsubscribe(@RequestBody UnsubscriptionRequest request){
+        System.out.println("DELETYE" + request.getId());
+        try{
+            this.subscriptionService.unsubscribe(request);
+            GenericResponse response = new GenericResponse("Vous vous êtes désabonné");
+            return ResponseEntity.ok(response);
+        }catch (Exception e){
+            GenericResponse response = new GenericResponse("Erreur"+ e);
+           return ResponseEntity.ok(response);
+        }
     }
 }

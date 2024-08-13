@@ -10,6 +10,7 @@ import com.openclassrooms.mddapi.models.Subscription;
 import com.openclassrooms.mddapi.models.Theme;
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.payload.request.SubscriptionRequest;
+import com.openclassrooms.mddapi.payload.request.UnsubscriptionRequest;
 import com.openclassrooms.mddapi.payload.response.SubscriptionResponse;
 import com.openclassrooms.mddapi.repository.SubscriptionRepository;
 
@@ -46,7 +47,9 @@ public class SubscriptionService {
 
     }
 
-    public void unsubscribe(Subscription subscription){
+    public void unsubscribe(UnsubscriptionRequest request){
+        System.out.println("DELETYE" + request.getId());
+        Subscription subscription = this.subscriptionRepository.findById(request.getId()).orElse(null);
         this.subscriptionRepository.delete(subscription);
     }
 

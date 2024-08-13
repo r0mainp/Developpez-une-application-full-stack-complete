@@ -26,9 +26,11 @@
             #profilePage
         >
             <button 
+                (disabled)="subscriptionId == undefined"
+                *ngIf="(isSubscribed$ | async)"
                 mat-raised-button 
                 color="primary"
-                (click)="unubscribe(theme.id)"
+                (click)="unubscribe()"
             >
                 Se désabonner
             </button>

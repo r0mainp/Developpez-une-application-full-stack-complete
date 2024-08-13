@@ -3,6 +3,7 @@ import { Theme } from '../../../features/articles/interfaces/theme';
 import { SubscriptionService } from 'src/app/core/services/subscription.service';
 import { SubscriptionRequest } from 'src/app/core/interfaces/subscription-request';
 import { map, Observable, of, switchMap } from 'rxjs';
+import { UnsubscriptionRequest } from 'src/app/core/interfaces/unsubscription-request';
 
 @Component({
   selector: 'theme-card',
@@ -12,6 +13,7 @@ import { map, Observable, of, switchMap } from 'rxjs';
 export class ThemeCardComponent implements OnInit{
   @Input() public theme!: Theme;
   @Input() public isThemePage: boolean = false;
+  public subscriptionId: number | undefined;
 
   public isSubscribed$: Observable<boolean> = of(false);
 
@@ -21,7 +23,15 @@ export class ThemeCardComponent implements OnInit{
 
   ngOnInit() {
     this.isSubscribed$ = this.subscriptionService.all().pipe(
-      map(subscriptions => subscriptions.some(sub => sub.theme_id === this.theme.id))
+      map(subscriptions => {
+        const subscription = subscriptions.find(sub => sub.theme_id === this.theme.id);
+        if (subscription) {
+          console.log(subscription)
+          this.subscriptionId = subscription.id;
+          return true;
+        }
+        return false;
+      })
     );
   }
 
@@ -35,9 +45,13 @@ export class ThemeCardComponent implements OnInit{
     })
   }
 
-  public unubscribe(id: number){
-    const request: SubscriptionRequest={
-      theme_id: id,
+  public unubscribe(){
+    if (this.subscriptionId === undefined) {
+      console.error('Subscription ID is undefined');
+      return;
+    }
+    const request: UnsubscriptionRequest={
+      id: this.subscriptionId,
     }
     this.subscriptionService.unSubscribe(request).subscribe((response) =>  console.log(response))
   }
