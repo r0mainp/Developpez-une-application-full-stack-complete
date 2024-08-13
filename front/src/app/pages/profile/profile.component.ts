@@ -99,7 +99,6 @@ export class ProfileComponent implements OnInit{
 
     this.userService.update(request).subscribe((response)=>{
       this.matSnackBar.open(response.message, "Close", { duration: 3000 });
-      console.log(response)
     })
   }
   public logout(): void{

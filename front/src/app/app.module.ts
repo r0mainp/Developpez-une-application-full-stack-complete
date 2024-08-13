@@ -13,6 +13,7 @@ import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { ArticlesModule } from './features/articles/articles.module';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ListComponent } from './pages/theme-list/theme-list.component';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { ListComponent } from './pages/theme-list/theme-list.component';
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
 })
