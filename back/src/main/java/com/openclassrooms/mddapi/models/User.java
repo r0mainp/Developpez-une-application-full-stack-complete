@@ -78,6 +78,11 @@ public class User implements UserDetails{
     @JsonBackReference
     private Set<Comment> comments = new HashSet<>();
 
+    @OneToMany(mappedBy = "subscription", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @Builder.Default
+    @JsonBackReference
+    private Set<Subscription> subscriptions = new HashSet<>();
+
     @Override
     public String getUsername() {
         return this.email;
