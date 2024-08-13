@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { RouterModule } from '@angular/router';
@@ -22,7 +23,8 @@ const materialModules = [
   MatInputModule,
   MatIconModule,
   MatSelectModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatSnackBarModule
 ]
 
 @NgModule({

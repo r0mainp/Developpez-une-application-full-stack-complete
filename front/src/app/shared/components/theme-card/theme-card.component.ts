@@ -4,6 +4,7 @@ import { SubscriptionService } from 'src/app/core/services/subscription.service'
 import { SubscriptionRequest } from 'src/app/core/interfaces/subscription-request';
 import { map, Observable, of, switchMap } from 'rxjs';
 import { UnsubscriptionRequest } from 'src/app/core/interfaces/unsubscription-request';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'theme-card',
@@ -21,7 +22,8 @@ export class ThemeCardComponent implements OnInit{
   public isSubscribed$: Observable<boolean> = of(false);
 
   constructor(
-    private subscriptionService: SubscriptionService
+    private subscriptionService: SubscriptionService,
+    private matSnackBar: MatSnackBar,
   ){}
 
   ngOnInit() {
@@ -46,7 +48,7 @@ export class ThemeCardComponent implements OnInit{
       theme_id: id,
     }
     this.subscriptionService.subscribe(request).subscribe((response) =>  {
-      console.log(response)
+      this.matSnackBar.open(response.message, "Close", { duration: 3000 });
       this.checkIfUserIsSubscribed()
     })
   }
@@ -60,7 +62,7 @@ export class ThemeCardComponent implements OnInit{
       id: this.subscriptionId,
     }
     this.subscriptionService.unSubscribe(request).subscribe((response) => {
-      console.log(response)
+      this.matSnackBar.open(response.message, "Close", { duration: 3000 });
       this.refreshSubscriptions.emit();
     })
   }

@@ -10,6 +10,7 @@ import { Theme } from 'src/app/features/articles/interfaces/theme';
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { AuthService } from 'src/app/features/auth/services/auth.service';
 import { SubscriptionService } from 'src/app/core/services/subscription.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile',
@@ -47,7 +48,8 @@ export class ProfileComponent implements OnInit{
     private userSessionService: UserSessionService,
     private userService: UserService,
     private themeService: ThemeService,
-    private subscriptionService: SubscriptionService
+    private subscriptionService: SubscriptionService,
+    private matSnackBar: MatSnackBar,
   ){}
 
   ngOnInit() {
@@ -96,6 +98,7 @@ export class ProfileComponent implements OnInit{
     }
 
     this.userService.update(request).subscribe((response)=>{
+      this.matSnackBar.open(response.message, "Close", { duration: 3000 });
       console.log(response)
     })
   }
