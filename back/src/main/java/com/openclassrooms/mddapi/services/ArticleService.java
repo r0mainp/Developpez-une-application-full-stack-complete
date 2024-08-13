@@ -1,6 +1,5 @@
 package com.openclassrooms.mddapi.services;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.openclassrooms.mddapi.dto.ArticleDto;
 import com.openclassrooms.mddapi.mapper.ArticleMapper;
 import com.openclassrooms.mddapi.models.Article;
+import com.openclassrooms.mddapi.payload.response.SubscriptionResponse;
 import com.openclassrooms.mddapi.repository.ArticleRepository;
 
 @Service
@@ -22,13 +22,19 @@ public class ArticleService {
     @Autowired
     private ArticleMapper articleMapper;
 
+    @Autowired
+    SubscriptionService subscriptionService;
+
 
     public Article findById(Integer id){
         return this.articleRepository.findById(id).orElse(null);
     }
 
-    public List<ArticleDto> findAllArticlesByUserSubscriptions(Integer userId, Sort sort){
-        List<Integer> themeIds = Arrays.asList(1, 2); // TODO: for tests, implements a solution based on subscriptions later
+    public List<ArticleDto> findAllArticlesByUserSubscriptions(Sort sort){
+        List<SubscriptionResponse> subscriptions = this.subscriptionService.getCurrentUserSubscriptions();
+        List<Integer> themeIds = subscriptions.stream()
+                .map(SubscriptionResponse::getTheme_id)
+                .collect(Collectors.toList());
 
         List<Article> articles = this.articleRepository.findByThemeIdIn(themeIds, sort);
         return articles.stream()

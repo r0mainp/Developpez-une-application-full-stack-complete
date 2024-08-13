@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { RouterModule } from '@angular/router';
 import { EllipsisModule } from 'ngx-ellipsis';
+import { ThemeCardComponent } from './components/theme-card/theme-card.component';
 
 const materialModules = [
   MatGridListModule,
@@ -26,7 +27,8 @@ const materialModules = [
 
 @NgModule({
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    ThemeCardComponent
   ],
   imports: [
     RouterModule,
@@ -42,6 +44,7 @@ const materialModules = [
     ReactiveFormsModule,
     HeaderComponent,
     EllipsisModule,
+    ThemeCardComponent,
     ...materialModules
   ],
 })

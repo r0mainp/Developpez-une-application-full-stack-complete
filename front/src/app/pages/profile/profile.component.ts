@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Observable, tap } from 'rxjs';
+import { combineLatest, map, Observable, tap } from 'rxjs';
+import { Subscription } from 'src/app/core/interfaces/subscription';
 import { User } from 'src/app/core/interfaces/user';
 import { UserRequest } from 'src/app/core/interfaces/user-request';
 import { UserSessionService } from 'src/app/core/services/user-session.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { Theme } from 'src/app/features/articles/interfaces/theme';
+import { ThemeService } from 'src/app/core/services/theme.service';
 import { AuthService } from 'src/app/features/auth/services/auth.service';
+import { SubscriptionService } from 'src/app/core/services/subscription.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,6 +18,7 @@ import { AuthService } from 'src/app/features/auth/services/auth.service';
 })
 export class ProfileComponent implements OnInit{
   public user$!: Observable<User>;
+  public subscriptionsWithThemes$!: Observable<(Subscription & { theme?: Theme })[]>;
 
   public form = this.builder.group({
     username: [
@@ -40,7 +45,9 @@ export class ProfileComponent implements OnInit{
     private builder: FormBuilder,
     private authService: AuthService,
     private userSessionService: UserSessionService,
-    private userService: UserService
+    private userService: UserService,
+    private themeService: ThemeService,
+    private subscriptionService: SubscriptionService
   ){}
 
   ngOnInit() {
@@ -52,6 +59,28 @@ export class ProfileComponent implements OnInit{
           id: user.id
         }
       ))
+    );
+
+    const subscriptions$ = this.subscriptionService.all();
+    const themes$ = this.themeService.all();
+
+    this.loadSubscriptionsWithThemes();
+  }
+
+  private loadSubscriptionsWithThemes() {
+    const subscriptions$ = this.subscriptionService.all();
+    const themes$ = this.themeService.all();
+
+    this.subscriptionsWithThemes$ = combineLatest([subscriptions$, themes$]).pipe(
+      map(([subscriptions, themes]) => {
+        return subscriptions.map(subscription => {
+          const theme = themes.find(theme => theme.id === subscription.theme_id);
+          return {
+            ...subscription,
+            theme
+          };
+        });
+      })
     );
   }
 
@@ -72,5 +101,9 @@ export class ProfileComponent implements OnInit{
   }
   public logout(): void{
     this.userSessionService.logOut();
+  }
+
+  public handleRefresh() {
+    this.loadSubscriptionsWithThemes();
   }
 }

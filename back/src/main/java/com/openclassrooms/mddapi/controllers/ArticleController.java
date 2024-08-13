@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +19,6 @@ import com.openclassrooms.mddapi.models.Article;
 import com.openclassrooms.mddapi.models.Theme;
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.payload.request.ArticleRequest;
-import com.openclassrooms.mddapi.payload.response.UserResponse;
 import com.openclassrooms.mddapi.services.ArticleService;
 import com.openclassrooms.mddapi.services.ThemeService;
 import com.openclassrooms.mddapi.services.UserService;
@@ -46,14 +44,9 @@ public class ArticleController {
     public ResponseEntity<?> findAllArticleFromSubscribedThemes(
         @RequestParam(defaultValue = "desc") String sort
     ) {
-        UserResponse currentUser = this.userService.getSafeCurrentUser();
-        if (currentUser == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
-        }
-
         Sort sortOrder = Sort.by(Sort.Order.by("createdAt").with(Sort.Direction.fromString(sort)));
 
-        List<ArticleDto> articles = this.articleService.findAllArticlesByUserSubscriptions(currentUser.getId(), sortOrder);
+        List<ArticleDto> articles = this.articleService.findAllArticlesByUserSubscriptions(sortOrder);
         return ResponseEntity.ok(articles);
     }
 

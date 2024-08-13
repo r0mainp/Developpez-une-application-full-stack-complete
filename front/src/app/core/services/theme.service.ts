@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Theme } from '../interfaces/theme';
+import { Theme } from '../../features/articles/interfaces/theme';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ThemeApiService {
+export class ThemeService {
 
   private pathService = 'api/theme';
 

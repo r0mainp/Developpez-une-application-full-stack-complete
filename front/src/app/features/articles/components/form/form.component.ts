@@ -1,12 +1,12 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Theme } from 'src/app/features/themes/interfaces/theme';
-import { ThemeApiService } from 'src/app/features/themes/services/theme-api.service';
+import { Theme } from 'src/app/features/articles/interfaces/theme';
 import { ArticleRequest } from '../../interfaces/article-request';
 import { ArticleService } from '../../services/article.service';
 import { Article } from '../../interfaces/article';
 import { Router } from '@angular/router';
+import { ThemeService } from '../../../../core/services/theme.service';
 
 @Component({
   selector: 'app-form',
@@ -40,7 +40,7 @@ export class FormComponent {
 
   constructor(
     private builder: FormBuilder,
-    private themeService: ThemeApiService,
+    private themeService: ThemeService,
     private articleService: ArticleService,
     private router: Router,
   ){}
