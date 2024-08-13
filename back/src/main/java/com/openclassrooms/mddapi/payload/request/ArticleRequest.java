@@ -32,7 +32,7 @@ public class ArticleRequest {
         return theme_id;
     }
 
-    public void setTheme_idd(Integer theme_id) {
+    public void setTheme_id(Integer theme_id) {
         this.theme_id = theme_id;
     }
 

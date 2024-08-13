@@ -1,6 +1,9 @@
 package com.openclassrooms.mddapi.payload.request;
 
+import jakarta.validation.constraints.NotNull;
+
 public class SubscriptionRequest {
+    @NotNull
     private Integer theme_id;
 
     public Integer getTheme_id() {
