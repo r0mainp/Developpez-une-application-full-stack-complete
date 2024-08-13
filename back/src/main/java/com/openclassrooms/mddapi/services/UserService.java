@@ -14,6 +14,11 @@ import com.openclassrooms.mddapi.payload.request.UserRequest;
 import com.openclassrooms.mddapi.payload.response.UserResponse;
 import com.openclassrooms.mddapi.repository.UserRepository;
 
+/**
+ * Service class for managing {@link User} entities and user-related operations.
+ * Provides methods to get user information by ID, get the currently authenticated user,
+ * and update user details.
+ */
 @Service
 public class UserService {
 
@@ -21,12 +26,23 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    UserResponseMapper userResponseMapper;
+    private UserResponseMapper userResponseMapper;
 
+    /**
+     * Retrieves a {@link UserResponse} object by the user's ID.
+     * 
+     * @param id The ID of the {@link User} to retrieve.
+     * @return An {@link Optional} containing the {@link UserResponse} if the user is found, otherwise an empty {@link Optional}.
+     */
     public Optional<UserResponse> getUserById(final Integer id) {
         return userRepository.findById(id).map(userResponseMapper::toUserResponse);
     }
 
+    /**
+     * Retrieves the currently authenticated user as a {@link UserResponse} object.
+     * 
+     * @return The {@link UserResponse} of the currently authenticated user, or {@code null} if no user is authenticated.
+     */
     public UserResponse getSafeCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
@@ -41,6 +57,11 @@ public class UserService {
         return null;
     }
 
+    /**
+     * Retrieves the currently authenticated user as a {@link User} object.
+     * 
+     * @return The {@link User} of the currently authenticated user, or {@code null} if no user is authenticated.
+     */
     public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
@@ -48,20 +69,27 @@ public class UserService {
             
             if (principal instanceof UserDetails) {
                 String username = ((UserDetails) principal).getUsername();
-                User user = userRepository.findByEmail(username).orElse(null);
-                return user;
+                return userRepository.findByEmail(username).orElse(null);
             }
         }
         return null;
     }
 
+    /**
+     * Updates the details of a {@link User} based on the provided {@link UserRequest}.
+     * 
+     * @param request The {@link UserRequest} containing the new user details.
+     * @return The updated {@link User} entity.
+     */
     public User updateUser(UserRequest request) {
         User user = userRepository.findById(request.getId())
                 .orElse(null);
 
-        user.setUsername(request.getUsername());
-        user.setEmail(request.getEmail());
-
-        return userRepository.save(user);
+        if (user != null) {
+            user.setUsername(request.getUsername());
+            user.setEmail(request.getEmail());
+            return userRepository.save(user);
+        }
+        return null;
     }
 }
