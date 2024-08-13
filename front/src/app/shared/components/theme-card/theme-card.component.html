@@ -1,33 +1,37 @@
 <mat-card 
     class="theme-card"
 >
-<mat-card-header>
-    <mat-card-title>{{ theme.name }}</mat-card-title>
-</mat-card-header>
-<mat-card-content>
-    <p  class="theme-content" ellipsis>
-        {{ theme.description }} 
-    </p>
-</mat-card-content>
-<mat-card-actions>
-    <button 
-        *ngIf="isThemePage; else profilePage"
-        mat-raised-button 
-        color="primary"
-        (click)="subscribe(theme.id)"
-    >
-        S'abonner
-    </button>
-    <ng-template
-        #profilePage
-    >
-        <button 
-            mat-raised-button 
-            color="primary"
-            (click)="unubscribe(theme.id)"
+    <mat-card-header>
+        <mat-card-title>{{ theme.name }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <p  class="theme-content" ellipsis>
+            {{ theme.description }} 
+        </p>
+    </mat-card-content>
+    <mat-card-actions>
+        <ng-container
+            *ngIf="isThemePage; else profilePage"
         >
-            Se désabonner
-        </button>
-    </ng-template>
-</mat-card-actions>
+            <button 
+                *ngIf="!(isSubscribed$ | async)"
+                mat-raised-button 
+                color="primary"
+                (click)="subscribe(theme.id)"
+            >
+                S'abonner
+            </button>
+        </ng-container>
+        <ng-template
+            #profilePage
+        >
+            <button 
+                mat-raised-button 
+                color="primary"
+                (click)="unubscribe(theme.id)"
+            >
+                Se désabonner
+            </button>
+        </ng-template>
+    </mat-card-actions>
 </mat-card>
