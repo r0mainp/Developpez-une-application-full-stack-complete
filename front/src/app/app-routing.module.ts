@@ -6,8 +6,16 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ListComponent } from './pages/theme-list/theme-list.component';
 
-// consider a guard combined with canLoad / canActivate route option
-// to manage unauthenticated user to access private routes
+/**
+ * Defines the routing configuration for the application.
+ * 
+ * @remarks
+ * This module configures the application's routes, including lazy-loaded
+ * modules and guards to control access to different routes based on the 
+ * user's authentication state.
+ * 
+ * @module
+ */
 const routes: Routes = [
   { 
     canActivate: [UnauthGuard],
