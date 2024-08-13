@@ -1,25 +1,38 @@
-# P6-Full-Stack-reseau-dev
 
-## Front
+### Project setup
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+- Get project from github with `git clone https://github.com/r0mainp/Developpez-une-application-full-stack-complete`
+- Move to `front` folder with `cd front` and install dependencies with `npm install`
+- Move to `back` folder with `cd ../back` and install dependencies with `mvn install`
 
-Don't forget to install your node_modules before starting (`npm install`).
+### Create database
 
-### Development server
+We assume MySql is already installed on your computer. If not you can follow this link https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Depending on your root user and password update `spring.datasource.username` and `spring.datasource.password` in `back/src/main/resources/application.properties`.
 
-### Build
+- Run mysql with :
+    - `mysql -u root -p` on Mac or Linux
+    - Running `MYSQL command line client` on Windows
+- To create database use `CREATE DATABASE mdd;`
+- Select the database with : `USE mdd;`
+- Assuming you're at the root of the project load the script `script.sql` with `mysql -u root -p test < ressources\sql\script.sql`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Run and use app
 
-### Where to start
+- In the folder `back` use: `mvn spring-boot:run` to launch the backend app
+- In the folder `front` use: `ng serve` to launch the front end app
+- in the same folder install cypress with `./node_modules/.bin/cypress install`
 
-As you may have seen if you already started the app, a simple home page containing a logo, a title and a button is available. If you take a look at its code (in the `home.component.html`) you will see that an external UI library is already configured in the project.
+App is available at `http://localhost:4200`.
 
-This library is `@angular/material`, it's one of the most famous in the angular ecosystem. As you can see on their docs (https://material.angular.io/), it contains a lot of highly customizable components that will help you design your interfaces quickly.
+## App
 
-Note: I recommend to use material however it's not mandatory, if you prefer you can get ride of it.
+You can register a new user.
+The provided script has created 2 Theme (Front-end and Back-end). 
+You can subscribe to a tehme and/or create an new article.
+Once it's done you'll find your articles on the Articles page where you can order them by creatiopn date.
 
-Good luck!
+To unsubscribe or update your username/email you can go to profile page.
+
+App is responsive.
