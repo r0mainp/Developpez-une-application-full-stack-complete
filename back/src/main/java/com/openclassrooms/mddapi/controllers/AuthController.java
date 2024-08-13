@@ -21,16 +21,27 @@ import com.openclassrooms.mddapi.payload.response.UserResponse;
 import com.openclassrooms.mddapi.security.jwt.JwtUtils;
 import com.openclassrooms.mddapi.services.AuthenticationService;
 
+/**
+ * Controller for handling authentication and user registration.
+ * Provides endpoints for user login, registration, and retrieving the current authenticated user's details.
+ */
 @RequestMapping("/api/auth")
 @RestController
 public class AuthController {
 
     @Autowired
-    JwtUtils jwtUtils;
+    private JwtUtils jwtUtils;
 
     @Autowired
-    AuthenticationService authenticationService;
+    private AuthenticationService authenticationService;
 
+    /**
+     * Authenticates a user and generates a JWT token upon successful login.
+     * 
+     * @param request The {@link LoginRequest} object containing the user's login credentials.
+     * @return ResponseEntity containing an {@link AuthResponse} with the JWT token if authentication is successful,
+     *         or a {@link GenericResponse} with an error message if authentication fails.
+     */
     @PostMapping("/login")
     public ResponseEntity<?> authenticate(@RequestBody LoginRequest request) {
         try {
@@ -47,6 +58,13 @@ public class AuthController {
         }
     }
 
+    /**
+     * Registers a new user and generates a JWT token upon successful registration.
+     * 
+     * @param request The {@link RegisterRequest} object containing the user's registration details.
+     * @return ResponseEntity containing an {@link AuthResponse} with the JWT token if registration is successful,
+     *         or a {@link GenericResponse} with an error message if registration fails.
+     */
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
         try {
@@ -58,11 +76,17 @@ public class AuthController {
             return ResponseEntity.ok(response);
         }
         catch (AuthenticationException ex) {
-            GenericResponse errorResponse = new GenericResponse("User already exits.");
+            GenericResponse errorResponse = new GenericResponse("User already exists.");
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorResponse);
         }
     }
 
+    /**
+     * Retrieves the details of the currently authenticated user.
+     * 
+     * @return ResponseEntity containing a {@link UserResponse} with the user's details if authenticated,
+     *         or a {@link GenericResponse} with an error message if the user is not authenticated.
+     */
     @GetMapping("/me")
     public ResponseEntity<?> authenticatedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -88,5 +112,4 @@ public class AuthController {
 
         return ResponseEntity.ok(userDetails);
     }
-
 }
