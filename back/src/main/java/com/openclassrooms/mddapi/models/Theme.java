@@ -69,7 +69,7 @@ public class Theme {
     @JsonBackReference
     private Set<Article> articles = new HashSet<>();
 
-    @OneToMany(mappedBy = "subscription", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "theme", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default
     @JsonBackReference
     private Set<Subscription> subscriptions = new HashSet<>();

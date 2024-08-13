@@ -3,7 +3,6 @@ package com.openclassrooms.mddapi.models;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -28,7 +27,7 @@ import lombok.experimental.Accessors;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "ARTICLES")
+@Table(name = "SUBSCRIPTIONS")
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(of = {"id"})
@@ -55,9 +54,5 @@ public class Subscription {
     @CreatedDate
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
-
-    @LastModifiedDate
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
 
 }
