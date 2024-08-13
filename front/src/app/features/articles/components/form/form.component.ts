@@ -49,15 +49,11 @@ export class FormComponent {
 
   public submit(): void{
     if (this.form.valid) {
-      console.log( this.form.value)
       const articleRequest = this.form.value as ArticleRequest;
       this.articleService.create(articleRequest).subscribe((article: Article) =>{
           if(article){
             this.router.navigate([`/feed`]);
             this.matSnackBar.open("Article créé", "Close", { duration: 3000 });
-          }else{
-            //TODO: handle error
-            console.error(article)
           }
       }
       )
