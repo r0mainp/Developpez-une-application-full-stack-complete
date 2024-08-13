@@ -1,7 +1,6 @@
 <div
     class="profile-wrapper"
 >
-
     <div
         *ngIf="user$ |async as user"
         class="profile-container"
@@ -39,12 +38,16 @@
         <button mat-button class="logout-btn" (click)="logout()">Se déconnecter</button>
     </div>
     <hr>
-    <div>
-        <div>
-            TEST
-        </div>
-        <div *ngFor="let subscription of subscriptionsWithThemes$ | async">
-            <theme-card *ngIf="subscription.theme" [theme]="subscription.theme"></theme-card>
+    <div class="theme-container">
+        <div 
+            *ngFor="let subscription of subscriptionsWithThemes$ | async"
+            class="theme-card"
+        >
+            <theme-card 
+                *ngIf="subscription.theme" 
+                [theme]="subscription.theme"
+                
+            ></theme-card>
           </div>
     </div>
 </div>
