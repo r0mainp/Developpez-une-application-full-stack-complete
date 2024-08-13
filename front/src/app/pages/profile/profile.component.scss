@@ -1,7 +1,10 @@
 @import 'mq-mixins';
 .profile-wrapper{
-    margin: 2rem;
+    margin: calc($margins / 2);
     height: $height-w-header;
+    max-height: $height-w-header;
+    display: flex;
+    flex-direction: column;
     .profile-container{
         display: flex;
         flex-direction: column;
@@ -20,7 +23,8 @@
         display: flex;
         flex-wrap: wrap;
         gap: 1rem;
-
+        overflow: auto;
+        padding: 0.5rem;
         .theme-card{
             flex-basis: 100%;
             @include md {

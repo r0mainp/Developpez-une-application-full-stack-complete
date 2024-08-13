@@ -27,6 +27,6 @@ export class ThemeCardComponent{
     const request: SubscriptionRequest={
       theme_id: id,
     }
-    this.subscriptionService.subscribe(request).subscribe((response) =>  console.log(response))
+    this.subscriptionService.unSubscribe(request).subscribe((response) =>  console.log(response))
   }
 }
