@@ -17,6 +17,7 @@ import com.openclassrooms.mddapi.models.Article;
 import com.openclassrooms.mddapi.models.Comment;
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.payload.request.CommentRequest;
+import com.openclassrooms.mddapi.payload.response.GenericResponse;
 import com.openclassrooms.mddapi.services.ArticleService;
 import com.openclassrooms.mddapi.services.CommentService;
 import com.openclassrooms.mddapi.services.UserService;
@@ -60,10 +61,10 @@ public class CommentController {
      * Adds a new comment to a specific article.
      * 
      * @param request The {@link CommentRequest} object containing the details of the comment to be added.
-     * @return The created {@link Comment} object.
+     * @return A {@link GenericResponse} object containing a message indicating the result of the comment addition.
      */
     @PostMapping("/add")
-    public Comment addComment(@RequestBody CommentRequest request) {
+    public GenericResponse addComment(@RequestBody CommentRequest request) {
         User currentUser = this.userService.getCurrentUser();
         Article relatedArticle = this.articleService.findById(request.getArticle_id());
 
@@ -72,6 +73,10 @@ public class CommentController {
             .setArticle(relatedArticle)
             .setContent(request.getContent());
 
-        return this.commentService.addComment(commentToAdd);
+        this.commentService.addComment(commentToAdd);
+
+        GenericResponse response =  new GenericResponse("Commentaire ajouté");
+
+        return response;
     }
 }
