@@ -1,5 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { AuthService } from './features/auth/services/auth.service';
+import { UserSessionService } from './core/services/user-session.service';
 
 /**
  * The root component of the application.
@@ -15,7 +17,7 @@ import { MatSidenav } from '@angular/material/sidenav';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   
   /**
    * The title of the application.
@@ -30,6 +32,25 @@ export class AppComponent {
    * @type {MatSidenav}
    */
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
+
+
+  constructor(
+    private authService: AuthService,
+    private userSessionService: UserSessionService
+  ){}
+
+  ngOnInit() {
+    const token = localStorage.getItem('token');
+    if (token && !this.userSessionService.isLogged) {
+      this.authService.me().subscribe(user => {
+        if (user) {
+          this.userSessionService.logIn(user);
+        } else {
+          this.userSessionService.logOut(); // Optional: handle if no user is found
+        }
+      });
+    }
+  }
 
   /**
    * Toggles the open/closed state of the side navigation menu.

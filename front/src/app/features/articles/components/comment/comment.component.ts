@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Comment } from '../../interfaces/comment';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CommentRequest } from '../../interfaces/comment-request';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 /**
  * Component for managing and displaying comments associated with an article.
@@ -66,6 +67,7 @@ export class CommentComponent implements OnInit {
   constructor(
     private commentService: CommentService,
     private builder: FormBuilder,
+    private matSnackBar: MatSnackBar,
   ) {}
 
   /**
@@ -95,6 +97,7 @@ export class CommentComponent implements OnInit {
       next: () => {
         this.form.reset();
         this.comments$ = this.commentService.all(this.articleId);
+        this.matSnackBar.open("Commentaire ajouté", "Close", { duration: 3000 });
       },
       error: (error) => {
         console.error('Error', error);
